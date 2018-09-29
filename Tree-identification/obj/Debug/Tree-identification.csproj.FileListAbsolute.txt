@@ -1,0 +1,7 @@
+D:\Projects\HSE-SD-course\Tree-identification\bin\Debug\Tree-identification.exe.config
+D:\Projects\HSE-SD-course\Tree-identification\bin\Debug\Tree-identification.exe
+D:\Projects\HSE-SD-course\Tree-identification\bin\Debug\Tree-identification.pdb
+D:\Projects\HSE-SD-course\Tree-identification\obj\Debug\Tree-identification.csprojAssemblyReference.cache
+D:\Projects\HSE-SD-course\Tree-identification\obj\Debug\Tree-identification.csproj.CoreCompileInputs.cache
+D:\Projects\HSE-SD-course\Tree-identification\obj\Debug\Tree-identification.exe
+D:\Projects\HSE-SD-course\Tree-identification\obj\Debug\Tree-identification.pdb
