@@ -9,9 +9,7 @@
             string value,
             Types.Value valueType,
             Types.Identificator identType = Types.Identificator.consts)
-            : base(name, valueType, identType)
-        {
+            : base(name, valueType, identType) =>
             _value = value;
-        }
     }
 }
