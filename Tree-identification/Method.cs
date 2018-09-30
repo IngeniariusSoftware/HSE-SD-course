@@ -9,9 +9,7 @@
             Structures.List arguments,
             Types.Value valueType,
             Types.Identificator identType = Types.Identificator.methods)
-            : base(name, valueType, identType)
-        {
+            : base(name, valueType, identType) =>
             _arguments = arguments;
-        }
     }
 }
