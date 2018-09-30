@@ -42,6 +42,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BinaryTree.cs" />
+    <Compile Include="Identificator.cs" />
+    <Compile Include="Class.cs" />
+    <Compile Include="Const.cs" />
+    <Compile Include="Types.cs" />
+    <Compile Include="Variable.cs" />
+    <Compile Include="Method.cs" />
+    <Compile Include="List.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
