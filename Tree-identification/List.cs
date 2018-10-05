@@ -51,7 +51,7 @@ namespace Structures
             List shelf = this;
             while (shelf._nextElement !=null)
             {
-                shelf = _nextElement;
+                shelf = shelf._nextElement;
             }
 
             shelf._nextElement = element;

@@ -12,7 +12,7 @@ namespace Tree_identification
     {
         public static List<(Types.Value, Types.Parameter)> ArgumentsParser(string methodInput)
         {
-            Regex regMethod = new Regex(@"\s*(?<param>(ref)|(out))*\s*(?<value>(int)|(char)|(float)|(bool)|(string))");
+            Regex regMethod = new Regex(@"\s*(?<param>(ref)|(out))*\s*(?<value>(int)|(char)|(float)|(bool)|(string))+");
             List<(Types.Value, Types.Parameter)> arguments = new List<(Types.Value, Types.Parameter)>();
             foreach (Match match in regMethod.Matches(methodInput))
             {
