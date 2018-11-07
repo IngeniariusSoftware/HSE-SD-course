@@ -45,36 +45,47 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs">
+    <Compile Include="DrawingSystem.cs" />
+    <Compile Include="Ellipse.cs" />
+    <Compile Include="FileNameSystem.cs" />
+    <Compile Include="Line.cs" />
+    <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmChild.cs">
+    <Compile Include="OpenFileSystem.cs" />
+    <Compile Include="Pencil.cs" />
+    <Compile Include="Picture.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmChild.Designer.cs">
-      <DependentUpon>frmChild.cs</DependentUpon>
+    <Compile Include="Picture.Designer.cs">
+      <DependentUpon>Picture.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Rectangle.cs" />
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Picture.resx">
+      <DependentUpon>Picture.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
@@ -83,6 +94,36 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CanvasIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\EraserIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PenIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LineIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DiagonalIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\EllipseIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RectangleIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StarIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LoupePlusIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LoupeMinusIcon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
