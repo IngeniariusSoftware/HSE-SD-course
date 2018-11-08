@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using Structures;
-
-namespace Tree_identification
+﻿namespace Tree_identification
 {
+    using System;
+    using System.Collections.Generic;
+    using Structures;
     using System.IO;
     using System.Text.RegularExpressions;
     using Program_Elements;
