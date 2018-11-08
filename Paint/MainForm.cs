@@ -120,5 +120,10 @@
                 DrawingSystem.ChangeColor(_colorDialog.Color);
             }
         }
+
+        private void EffectToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

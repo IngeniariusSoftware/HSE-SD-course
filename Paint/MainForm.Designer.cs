@@ -337,7 +337,7 @@
             // эффектToolStripMenuItem
             // 
             this.эффектToolStripMenuItem.Name = "эффектToolStripMenuItem";
-            this.эффектToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.эффектToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.эффектToolStripMenuItem.Text = "Эффект";
             // 
             // PaintMenuStrip

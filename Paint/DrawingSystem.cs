@@ -2,6 +2,7 @@
 {
     using System.Drawing;
     using System.Windows.Forms;
+    using LibraryEffects;
 
     public static class DrawingSystem
     {
