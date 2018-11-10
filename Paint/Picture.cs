@@ -8,7 +8,6 @@
         public Picture()
         {
             InitializeComponent();
-            WindowState = FormWindowState.Maximized;
             pictureBox.BackgroundImage = new Bitmap(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
         }
 
@@ -30,6 +29,7 @@
         private void PictureBox_MouseDown(object sender, MouseEventArgs e)
         {
             pictureBox.Image = DrawingSystem.Buffer;
+            DrawingSystem.SetPaintRegionSize(pictureBox.Size);
             DrawingSystem.SetBackgroundColor(pictureBox.BackColor);
             DrawingSystem.StartDrawing(e.Location);
         }

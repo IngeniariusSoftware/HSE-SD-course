@@ -3,6 +3,7 @@
     using System;
     using System.Drawing;
     using System.Windows.Forms;
+    using LibraryEffects;
 
     public partial class MainForm : Form
     {
@@ -108,7 +109,7 @@
 
         private void TrackBarSize_ValueChanged(object sender, EventArgs e)
         {
-            DrawingSystem.ChangeSize(((TrackBar)sender).Value);
+            DrawingSystem.ChangePenSize(((TrackBar)sender).Value);
         }
 
         private void ButtonColor_Click(object sender, EventArgs e)
@@ -117,11 +118,11 @@
             if (_colorDialog.ShowDialog() == DialogResult.OK)
             {
                 ButtonColor.BackColor = _colorDialog.Color;
-                DrawingSystem.ChangeColor(_colorDialog.Color);
+                DrawingSystem.ChangePenColor(_colorDialog.Color);
             }
         }
 
-        private void EffectToolStripMenuItem_Click(object sender, EventArgs e)
+        private void BlurEffectMenuItem_Click(object sender, EventArgs e)
         {
 
         }

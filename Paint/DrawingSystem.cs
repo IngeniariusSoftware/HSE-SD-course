@@ -1,8 +1,8 @@
 ﻿namespace Paint
 {
     using System.Drawing;
+    using System.Drawing.Drawing2D;
     using System.Windows.Forms;
-    using LibraryEffects;
 
     public static class DrawingSystem
     {
@@ -86,6 +86,8 @@
 
         private static Color _penColor = Color.Black;
 
+        private static Size _paintRegionSize;
+
         private static Color PenColor
         {
             get
@@ -106,6 +108,7 @@
         public static void EndDrawing(Image lastImage)
         {
             _graphics = Graphics.FromImage(lastImage);
+            _graphics.SetClip(new System.Drawing.Rectangle(0, 0, _paintRegionSize.Width, _paintRegionSize.Height));
             _graphics.DrawImage(Buffer, 0, 0);
             _graphics = Graphics.FromImage(Buffer);
             _graphics.Clear(Color.Empty);
@@ -116,6 +119,9 @@
         public static void StartDrawing(Point cursor)
         {
             _graphics = Graphics.FromImage(Buffer);
+            
+            _graphics.CompositingQuality = CompositingQuality.HighQuality;
+            _graphics.SmoothingMode = SmoothingMode.HighQuality;
             IsDrawing = true;
             switch (_tool)
             {
@@ -191,12 +197,12 @@
             }
         }
 
-        public static void ChangeSize(float penSize)
+        public static void ChangePenSize(float penSize)
         {
             _pen.Width = penSize;
         }
 
-        public static void ChangeColor(Color newColor)
+        public static void ChangePenColor(Color newColor)
         {
             PenColor = newColor;
             
@@ -211,6 +217,10 @@
         {
             _eraserColor = backGroundColor;
         }
-        
+
+        public static void SetPaintRegionSize(Size size)
+        {
+            _paintRegionSize = size;
+        }
     }
 }

@@ -55,8 +55,8 @@
             this.SaveFileMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.ExitMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.PictureMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.эффектToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.EffectsMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.BlurEffectMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.PaintMenuStrip = new System.Windows.Forms.MenuStrip();
             this.WindowMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.CascadeWindowMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -324,21 +324,22 @@
             this.ExitMenuItem.Size = new System.Drawing.Size(162, 22);
             this.ExitMenuItem.Text = "Выход";
             // 
-            // PictureMenuItem
+            // EffectsMenuItem
             // 
-            this.PictureMenuItem.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.PictureMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.эффектToolStripMenuItem});
-            this.PictureMenuItem.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.PictureMenuItem.Name = "PictureMenuItem";
-            this.PictureMenuItem.Size = new System.Drawing.Size(70, 19);
-            this.PictureMenuItem.Text = "Эффекты";
+            this.EffectsMenuItem.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.EffectsMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.BlurEffectMenuItem});
+            this.EffectsMenuItem.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.EffectsMenuItem.Name = "EffectsMenuItem";
+            this.EffectsMenuItem.Size = new System.Drawing.Size(70, 19);
+            this.EffectsMenuItem.Text = "Эффекты";
             // 
-            // эффектToolStripMenuItem
+            // BlurEffectMenuItem
             // 
-            this.эффектToolStripMenuItem.Name = "эффектToolStripMenuItem";
-            this.эффектToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.эффектToolStripMenuItem.Text = "Эффект";
+            this.BlurEffectMenuItem.Name = "BlurEffectMenuItem";
+            this.BlurEffectMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.BlurEffectMenuItem.Text = "Размытие";
+            this.BlurEffectMenuItem.Click += new System.EventHandler(this.BlurEffectMenuItem_Click);
             // 
             // PaintMenuStrip
             // 
@@ -346,7 +347,7 @@
             this.PaintMenuStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Visible;
             this.PaintMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.FileMenuItem,
-            this.PictureMenuItem,
+            this.EffectsMenuItem,
             this.WindowMenuItem});
             this.PaintMenuStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Flow;
             this.PaintMenuStrip.Location = new System.Drawing.Point(0, 0);
@@ -429,8 +430,8 @@
         private System.Windows.Forms.ToolStripMenuItem SaveFileMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem ExitMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem PictureMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem эффектToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem EffectsMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem BlurEffectMenuItem;
         private System.Windows.Forms.MenuStrip PaintMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem WindowMenuItem;
         private System.Windows.Forms.ToolStripMenuItem CascadeWindowMenuItem;
