@@ -4,6 +4,8 @@
     using System.Drawing.Drawing2D;
     using System.Windows.Forms;
 
+    using Paint.Tools;
+
     public static class DrawingSystem
     {
         public enum Tools
@@ -143,6 +145,12 @@
                         break;
                     }
 
+                case Tools.Star:
+                    {
+                        Star.StartDrawing(cursor);
+                        break;
+                    }
+
                 case Tools.Pen:
                     {
                         Pencil.StartDrawing(_graphics, _pen, cursor);
@@ -180,6 +188,13 @@
                     {
                         _graphics.Clear(Color.Empty);
                         Ellipse.Drawing(_graphics, _pen, currentPosition);
+                        break;
+                    }
+
+                case Tools.Star:
+                    {
+                        _graphics.Clear(Color.Empty);
+                        Star.Drawing(_graphics, _pen, currentPosition);
                         break;
                     }
 
