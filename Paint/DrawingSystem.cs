@@ -84,11 +84,24 @@
 
         public static Bitmap Buffer = new Bitmap(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
 
-        private static Pen _pen = new Pen(Color.Black, 1);
-
         private static Color _penColor = Color.Black;
 
+        private static Color PenColor
+        {
+            get
+            {
+                return _penColor;
+            }
+            set
+            {
+                _penColor = value;
+                _pen.Color = _penColor;
+            }
+        }
+
         private static Color _eraserColor = Color.Empty;
+
+        private static Pen _pen = new Pen(Color.Black, 1);
 
         public static void EndDrawing(Image lastImage)
         {
@@ -185,7 +198,8 @@
 
         public static void ChangeColor(Color newColor)
         {
-            _pen.Color = newColor;
+            PenColor = newColor;
+            
         }
 
         public static void ChangeTool(string newTool)
