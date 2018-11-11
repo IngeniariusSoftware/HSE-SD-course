@@ -3,7 +3,6 @@
     using System.Drawing;
     using System.Drawing.Drawing2D;
     using System.Windows.Forms;
-
     using Paint.Tools;
 
     public static class DrawingSystem
@@ -121,7 +120,7 @@
         public static void StartDrawing(Point cursor)
         {
             _graphics = Graphics.FromImage(Buffer);
-            
+
             _graphics.CompositingQuality = CompositingQuality.HighQuality;
             _graphics.SmoothingMode = SmoothingMode.HighQuality;
             IsDrawing = true;
@@ -220,7 +219,7 @@
         public static void ChangePenColor(Color newColor)
         {
             PenColor = newColor;
-            
+
         }
 
         public static void ChangeTool(string newTool)

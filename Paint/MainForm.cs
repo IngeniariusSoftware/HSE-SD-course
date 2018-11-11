@@ -3,7 +3,6 @@
     using System;
     using System.Drawing;
     using System.Windows.Forms;
-    using LibraryEffects;
 
     public partial class MainForm : Form
     {
@@ -122,9 +121,24 @@
             }
         }
 
-        private void BlurEffectMenuItem_Click(object sender, EventArgs e)
+        private void EffectMenuItem_Click(object sender, EventArgs e)
         {
-
+            if (ActiveMdiChild != null && ActiveMdiChild is Picture)
+            {
+                switch (true)
+                {
+                    case true when sender.ToString() == BlurEffectMenuItem.Text:
+                        {
+                            ((Picture) ActiveMdiChild).EffectBlur_Click();
+                            break;
+                        }
+                    case true when sender.ToString() == SharpnessEffectMenuItem.Text:
+                        {
+                            ((Picture)ActiveMdiChild).EffectSharpness_Click();
+                            break;
+                        }
+                } 
+            }
         }
     }
 }
