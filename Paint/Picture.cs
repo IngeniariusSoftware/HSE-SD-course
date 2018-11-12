@@ -36,17 +36,17 @@
 
         public void EffectBlur_Click()
         {
-            pictureBox.BackgroundImage = EffectsSystem.BlurEffect.Apply((Bitmap)pictureBox.BackgroundImage);
+            EffectsSystem.BlurEffect.ApplyInPlace((Bitmap)pictureBox.BackgroundImage);
         }
 
         public void EffectSharpness_Click()
         {
-            pictureBox.BackgroundImage = EffectsSystem.SharpenEffect.Apply((Bitmap)pictureBox.BackgroundImage);
+            EffectsSystem.SharpenEffect.ApplyInPlace((Bitmap)pictureBox.BackgroundImage);
         }
 
         public void EffectMirrorX_Click()
         {
-            pictureBox.BackgroundImage = EffectsSystem.MirrorXEffect.Apply((Bitmap)pictureBox.BackgroundImage);
+            EffectsSystem.MirrorXEffect.ApplyInPlace((Bitmap)pictureBox.BackgroundImage);
         }
 
         public void EffectMirrorY_Click()

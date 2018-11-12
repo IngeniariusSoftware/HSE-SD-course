@@ -137,7 +137,9 @@
                             ((Picture)ActiveMdiChild).EffectSharpness_Click();
                             break;
                         }
-                } 
+                }
+
+                ActiveMdiChild.Refresh();
             }
         }
     }
