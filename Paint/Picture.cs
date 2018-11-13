@@ -1,6 +1,7 @@
 ﻿namespace Paint
 {
     using System.Drawing;
+    using System.Drawing.Imaging;
     using System.Windows.Forms;
 
     public partial class Picture : Form
@@ -34,24 +35,35 @@
             DrawingSystem.StartDrawing(e.Location);
         }
 
-        public void EffectBlur_Click()
+        public void ApplyGaussianBlurEffect()
         {
-            EffectsSystem.BlurEffect.ApplyInPlace((Bitmap)pictureBox.BackgroundImage);
+            EffectsSystem.GaussianBlurEffect.ApplyInPlace((Bitmap)pictureBox.BackgroundImage);
         }
 
-        public void EffectSharpness_Click()
+        public void ApplyGaussianSharpenEffect()
         {
-            EffectsSystem.SharpenEffect.ApplyInPlace((Bitmap)pictureBox.BackgroundImage);
+            EffectsSystem.GaussianSharpenEffect.ApplyInPlace((Bitmap)pictureBox.BackgroundImage);
         }
 
-        public void EffectMirrorX_Click()
+        public void ApplyMirrorXEffect()
         {
             EffectsSystem.MirrorXEffect.ApplyInPlace((Bitmap)pictureBox.BackgroundImage);
         }
 
-        public void EffectMirrorY_Click()
+        public void ApplyMirrorYEffect()
         {
-            pictureBox.BackgroundImage = EffectsSystem.MirrorYEffect.Apply((Bitmap)pictureBox.BackgroundImage);
+            EffectsSystem.MirrorYEffect.ApplyInPlace((Bitmap)pictureBox.BackgroundImage);
         }
+
+        public void ApplySepiaEffect()
+        {
+            EffectsSystem.MirrorXEffect.ApplyInPlace((Bitmap)pictureBox.BackgroundImage);
+        }
+
+        public void ApplySimpleSkeletonizationEffect()
+        {
+            EffectsSystem.SimpleSkeletonizationEffect.ApplyInPlace((Bitmap)pictureBox.BackgroundImage);
+        }
+
     }
 }

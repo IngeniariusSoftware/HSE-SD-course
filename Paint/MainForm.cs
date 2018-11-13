@@ -129,12 +129,24 @@
                 {
                     case true when sender.ToString() == BlurEffectMenuItem.Text:
                         {
-                            ((Picture) ActiveMdiChild).EffectBlur_Click();
+                            ((Picture) ActiveMdiChild).ApplyGaussianBlurEffect();
                             break;
                         }
                     case true when sender.ToString() == SharpnessEffectMenuItem.Text:
                         {
-                            ((Picture)ActiveMdiChild).EffectSharpness_Click();
+                            ((Picture)ActiveMdiChild).ApplyGaussianSharpenEffect();
+                            break;
+                        }
+
+                    case true when sender.ToString() == MirrorXEffectMenuItem.Text:
+                        {
+                            ((Picture)ActiveMdiChild).ApplyMirrorXEffect();
+                            break;
+                        }
+
+                    case true when sender.ToString() == MirrorYEffectMenuItem.Text:
+                        {
+                            ((Picture)ActiveMdiChild).ApplyMirrorYEffect();
                             break;
                         }
                 }
