@@ -29,10 +29,7 @@
 
         private void PictureBox_MouseDown(object sender, MouseEventArgs e)
         {
-            pictureBox.Image = DrawingSystem.Buffer;
-            DrawingSystem.SetPaintRegionSize(pictureBox.Size);
-            DrawingSystem.SetBackgroundColor(pictureBox.BackColor);
-            DrawingSystem.StartDrawing(e.Location);
+            DrawingSystem.StartDrawing(e.Location, pictureBox);
         }
 
         public void ApplyGaussianBlurEffect()
@@ -57,7 +54,7 @@
 
         public void ApplySepiaEffect()
         {
-            EffectsSystem.MirrorXEffect.ApplyInPlace((Bitmap)pictureBox.BackgroundImage);
+            EffectsSystem.SepiaEffect.ApplyInPlace((Bitmap)pictureBox.BackgroundImage);
         }
 
         public void ApplySimpleSkeletonizationEffect()

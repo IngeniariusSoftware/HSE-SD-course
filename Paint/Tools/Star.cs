@@ -3,7 +3,7 @@
     using System;
     using System.Drawing;
 
-    public class Star
+    public static class Star
     {
         private static Point startPosition;
 

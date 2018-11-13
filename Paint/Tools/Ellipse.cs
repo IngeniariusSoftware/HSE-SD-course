@@ -3,7 +3,7 @@
     using System;
     using System.Drawing;
 
-    public class Ellipse
+    public static class Ellipse
     {
         private static Point startPosition;
 

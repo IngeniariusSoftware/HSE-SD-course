@@ -56,8 +56,10 @@
   <ItemGroup>
     <Compile Include="DrawingSystem.cs" />
     <Compile Include="EffectsSystem.cs" />
+    <Compile Include="Tools\BaseTool.cs" />
     <Compile Include="Tools\Ellipse.cs" />
     <Compile Include="FileNameSystem.cs" />
+    <Compile Include="Tools\Eraser.cs" />
     <Compile Include="Tools\Line.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
