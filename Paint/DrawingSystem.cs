@@ -81,45 +81,33 @@
 
         private static Graphics _graphics;
 
-        public static bool IsDrawing = false;
+        public static bool IsDrawing;
 
         public static Bitmap Buffer = new Bitmap(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
 
-        private static Color _penColor = Color.Black;
-
         private static Size _paintRegionSize;
-
-        private static Color PenColor
-        {
-            get
-            {
-                return _penColor;
-            }
-            set
-            {
-                _penColor = value;
-                _pen.Color = _penColor;
-            }
-        }
-
-        private static Color _eraserColor = Color.Empty;
 
         private static Pen _pen = new Pen(Color.Black, 1);
 
         public static void EndDrawing(Image lastImage)
         {
+            _graphics.Dispose();
             _graphics = Graphics.FromImage(lastImage);
             _graphics.SetClip(new System.Drawing.Rectangle(0, 0, _paintRegionSize.Width, _paintRegionSize.Height));
             _graphics.DrawImage(Buffer, 0, 0);
             _graphics = Graphics.FromImage(Buffer);
             _graphics.Clear(Color.Empty);
             IsDrawing = false;
-            _pen.Color = _penColor;
         }
 
-        public static void StartDrawing(Point cursor)
+        public static void StartDrawing(Point cursor, PictureBox pictureBox)
         {
-            _graphics = Graphics.FromImage(Buffer);
+            _paintRegionSize = pictureBox.Size;
+            if (_tool != Tools.Eraser)
+            {
+                pictureBox.Image = Buffer;
+                _graphics = Graphics.FromImage(Buffer);
+            }
 
             _graphics.CompositingQuality = CompositingQuality.HighQuality;
             _graphics.SmoothingMode = SmoothingMode.HighQuality;
@@ -158,8 +146,7 @@
 
                 case Tools.Eraser:
                     {
-                        _pen.Color = _eraserColor;
-                        Pencil.StartDrawing(_graphics, _pen, cursor);
+                        Eraser.StartDrawing(pictureBox.BackgroundImage, _pen, cursor);
                         break;
                     }
             }
@@ -205,7 +192,7 @@
 
                 case Tools.Eraser:
                     {
-                        Pencil.Drawing(_graphics, _pen, currentPosition);
+                        Eraser.Drawing(_graphics, _pen, currentPosition);
                         break;
                     }
             }
@@ -218,18 +205,13 @@
 
         public static void ChangePenColor(Color newColor)
         {
-            PenColor = newColor;
+            _pen.Color = newColor;
 
         }
 
         public static void ChangeTool(string newTool)
         {
             _tool = ToTool(newTool);
-        }
-
-        public static void SetBackgroundColor(Color backGroundColor)
-        {
-            _eraserColor = backGroundColor;
         }
 
         public static void SetPaintRegionSize(Size size)
