@@ -123,35 +123,36 @@
 
         private void EffectMenuItem_Click(object sender, EventArgs e)
         {
-            if (ActiveMdiChild != null && ActiveMdiChild is Picture)
+             Picture childPaintForm = ActiveMdiChild as Picture;
+            if (childPaintForm != null)
             {
                 switch (true)
                 {
                     case true when sender.ToString() == BlurEffectMenuItem.Text:
                         {
-                            ((Picture) ActiveMdiChild).ApplyGaussianBlurEffect();
+                            childPaintForm.ApplyGaussianBlurEffect();
                             break;
                         }
                     case true when sender.ToString() == SharpnessEffectMenuItem.Text:
                         {
-                            ((Picture)ActiveMdiChild).ApplyGaussianSharpenEffect();
+                            childPaintForm.ApplyGaussianSharpenEffect();
                             break;
                         }
 
                     case true when sender.ToString() == MirrorXEffectMenuItem.Text:
                         {
-                            ((Picture)ActiveMdiChild).ApplyMirrorXEffect();
+                            childPaintForm.ApplyMirrorXEffect();
                             break;
                         }
 
                     case true when sender.ToString() == MirrorYEffectMenuItem.Text:
                         {
-                            ((Picture)ActiveMdiChild).ApplyMirrorYEffect();
+                            childPaintForm.ApplyMirrorYEffect();
                             break;
                         }
                 }
 
-                ActiveMdiChild.Refresh();
+                childPaintForm.Refresh();
             }
         }
     }

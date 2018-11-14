@@ -3,16 +3,18 @@
     using System;
     using System.Drawing;
 
-    public static class Ellipse
-    {
-        private static Point startPosition;
+    using Paint.Tools;
 
-        public static void StartDrawing(Point cursor)
+    public class Ellipse:BaseTool
+    {
+        private Point startPosition;
+
+        public void StartDrawing(Graphics graphics, Pen pen, Point cursor):base(graphics, pen, cursor)
         {
-            startPosition = cursor;
+
         }
 
-        public static void Drawing(Graphics graphics, Pen pen, Point cursor)
+        public void Drawing(Point cursor):base(cursor)
         {
             graphics.DrawEllipse(
                 pen,
