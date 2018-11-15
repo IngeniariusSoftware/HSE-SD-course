@@ -1,21 +1,16 @@
 ﻿namespace Paint.Tools
 {
-    using System;
-    using System.Collections.Generic;
     using System.Drawing;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
 
     public abstract class BaseTool
     {
-        private Point _startPosition;
+        protected Point _startPosition;
 
-        private Graphics _graphics;
+        protected Graphics _graphics;
 
-        private Pen _pen;
+        protected Pen _pen;
 
-        public void StartDrawing(Graphics graphics, Pen pen, Point cursor)
+        public virtual void StartDrawing(Graphics graphics, Pen pen, Point cursor)
         {
             _pen = pen;
             _graphics = graphics;
@@ -23,6 +18,5 @@
         }
 
         public abstract void Drawing(Point cursor);
-
     }
 }
