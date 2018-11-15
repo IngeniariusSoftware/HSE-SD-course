@@ -58,20 +58,21 @@
             this.EffectsMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.BlurEffectMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.SharpnessEffectMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.сепияToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.зеленыйНегативToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.теснениеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.негативToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MirrorXEffectMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MirrorYEffectMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.повернутьНа90ПротивЧасовойToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.повернутьНа90ПоЧасовойToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.PaintMenuStrip = new System.Windows.Forms.MenuStrip();
             this.WindowMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.CascadeWindowMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.LeftWindowMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DropWindowMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.OrderWindowMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.повернутьНа90ПоЧасовойToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.повернутьНа90ПротивЧасовойToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.теснениеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.негативToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.зеленыйНегативToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.сепияToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.RotateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.PaintPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TrackBarSize)).BeginInit();
             this.PaintMenuStrip.SuspendLayout();
@@ -300,37 +301,37 @@
             // NewFileMenuItem
             // 
             this.NewFileMenuItem.Name = "NewFileMenuItem";
-            this.NewFileMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.NewFileMenuItem.Size = new System.Drawing.Size(180, 22);
             this.NewFileMenuItem.Text = "Новый";
             this.NewFileMenuItem.Click += new System.EventHandler(this.NewFileMenuItem_Click);
             // 
             // OpenFileMenuItem
             // 
             this.OpenFileMenuItem.Name = "OpenFileMenuItem";
-            this.OpenFileMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.OpenFileMenuItem.Size = new System.Drawing.Size(180, 22);
             this.OpenFileMenuItem.Text = "Открыть…";
             // 
             // SaveFileAsMenuItem
             // 
             this.SaveFileAsMenuItem.Name = "SaveFileAsMenuItem";
-            this.SaveFileAsMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.SaveFileAsMenuItem.Size = new System.Drawing.Size(180, 22);
             this.SaveFileAsMenuItem.Text = "Сохранить как…";
             // 
             // SaveFileMenuItem
             // 
             this.SaveFileMenuItem.Name = "SaveFileMenuItem";
-            this.SaveFileMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.SaveFileMenuItem.Size = new System.Drawing.Size(180, 22);
             this.SaveFileMenuItem.Text = "Сохранить";
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(159, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
             // 
             // ExitMenuItem
             // 
             this.ExitMenuItem.Name = "ExitMenuItem";
-            this.ExitMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.ExitMenuItem.Size = new System.Drawing.Size(180, 22);
             this.ExitMenuItem.Text = "Выход";
             // 
             // EffectsMenuItem
@@ -366,6 +367,30 @@
             this.SharpnessEffectMenuItem.Text = "Резкость";
             this.SharpnessEffectMenuItem.Click += new System.EventHandler(this.EffectMenuItem_Click);
             // 
+            // сепияToolStripMenuItem
+            // 
+            this.сепияToolStripMenuItem.Name = "сепияToolStripMenuItem";
+            this.сепияToolStripMenuItem.Size = new System.Drawing.Size(255, 22);
+            this.сепияToolStripMenuItem.Text = "Сепия";
+            // 
+            // зеленыйНегативToolStripMenuItem
+            // 
+            this.зеленыйНегативToolStripMenuItem.Name = "зеленыйНегативToolStripMenuItem";
+            this.зеленыйНегативToolStripMenuItem.Size = new System.Drawing.Size(255, 22);
+            this.зеленыйНегативToolStripMenuItem.Text = "Зеленый негатив";
+            // 
+            // теснениеToolStripMenuItem
+            // 
+            this.теснениеToolStripMenuItem.Name = "теснениеToolStripMenuItem";
+            this.теснениеToolStripMenuItem.Size = new System.Drawing.Size(255, 22);
+            this.теснениеToolStripMenuItem.Text = "Тиснение";
+            // 
+            // негативToolStripMenuItem
+            // 
+            this.негативToolStripMenuItem.Name = "негативToolStripMenuItem";
+            this.негативToolStripMenuItem.Size = new System.Drawing.Size(255, 22);
+            this.негативToolStripMenuItem.Text = "Негатив";
+            // 
             // MirrorXEffectMenuItem
             // 
             this.MirrorXEffectMenuItem.Name = "MirrorXEffectMenuItem";
@@ -380,6 +405,18 @@
             this.MirrorYEffectMenuItem.Text = "Отразить по вертикали";
             this.MirrorYEffectMenuItem.Click += new System.EventHandler(this.EffectMenuItem_Click);
             // 
+            // повернутьНа90ПротивЧасовойToolStripMenuItem
+            // 
+            this.повернутьНа90ПротивЧасовойToolStripMenuItem.Name = "повернутьНа90ПротивЧасовойToolStripMenuItem";
+            this.повернутьНа90ПротивЧасовойToolStripMenuItem.Size = new System.Drawing.Size(255, 22);
+            this.повернутьНа90ПротивЧасовойToolStripMenuItem.Text = "Повернуть на 90 против часовой";
+            // 
+            // повернутьНа90ПоЧасовойToolStripMenuItem
+            // 
+            this.повернутьНа90ПоЧасовойToolStripMenuItem.Name = "повернутьНа90ПоЧасовойToolStripMenuItem";
+            this.повернутьНа90ПоЧасовойToolStripMenuItem.Size = new System.Drawing.Size(255, 22);
+            this.повернутьНа90ПоЧасовойToolStripMenuItem.Text = "Повернуть на 90 по часовой";
+            // 
             // PaintMenuStrip
             // 
             this.PaintMenuStrip.BackColor = System.Drawing.SystemColors.ControlLightLight;
@@ -387,7 +424,8 @@
             this.PaintMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.FileMenuItem,
             this.EffectsMenuItem,
-            this.WindowMenuItem});
+            this.WindowMenuItem,
+            this.RotateToolStripMenuItem});
             this.PaintMenuStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Flow;
             this.PaintMenuStrip.Location = new System.Drawing.Point(0, 0);
             this.PaintMenuStrip.Name = "PaintMenuStrip";
@@ -436,41 +474,11 @@
             this.OrderWindowMenuItem.Text = "Упорядочить значки";
             this.OrderWindowMenuItem.Click += new System.EventHandler(this.ChangeWindowPosition_Click);
             // 
-            // повернутьНа90ПоЧасовойToolStripMenuItem
+            // RotateToolStripMenuItem
             // 
-            this.повернутьНа90ПоЧасовойToolStripMenuItem.Name = "повернутьНа90ПоЧасовойToolStripMenuItem";
-            this.повернутьНа90ПоЧасовойToolStripMenuItem.Size = new System.Drawing.Size(255, 22);
-            this.повернутьНа90ПоЧасовойToolStripMenuItem.Text = "Повернуть на 90 по часовой";
-            // 
-            // повернутьНа90ПротивЧасовойToolStripMenuItem
-            // 
-            this.повернутьНа90ПротивЧасовойToolStripMenuItem.Name = "повернутьНа90ПротивЧасовойToolStripMenuItem";
-            this.повернутьНа90ПротивЧасовойToolStripMenuItem.Size = new System.Drawing.Size(255, 22);
-            this.повернутьНа90ПротивЧасовойToolStripMenuItem.Text = "Повернуть на 90 против часовой";
-            // 
-            // теснениеToolStripMenuItem
-            // 
-            this.теснениеToolStripMenuItem.Name = "теснениеToolStripMenuItem";
-            this.теснениеToolStripMenuItem.Size = new System.Drawing.Size(255, 22);
-            this.теснениеToolStripMenuItem.Text = "Тиснение";
-            // 
-            // негативToolStripMenuItem
-            // 
-            this.негативToolStripMenuItem.Name = "негативToolStripMenuItem";
-            this.негативToolStripMenuItem.Size = new System.Drawing.Size(255, 22);
-            this.негативToolStripMenuItem.Text = "Негатив";
-            // 
-            // зеленыйНегативToolStripMenuItem
-            // 
-            this.зеленыйНегативToolStripMenuItem.Name = "зеленыйНегативToolStripMenuItem";
-            this.зеленыйНегативToolStripMenuItem.Size = new System.Drawing.Size(255, 22);
-            this.зеленыйНегативToolStripMenuItem.Text = "Зеленый негатив";
-            // 
-            // сепияToolStripMenuItem
-            // 
-            this.сепияToolStripMenuItem.Name = "сепияToolStripMenuItem";
-            this.сепияToolStripMenuItem.Size = new System.Drawing.Size(255, 22);
-            this.сепияToolStripMenuItem.Text = "Сепия";
+            this.RotateToolStripMenuItem.Name = "RotateToolStripMenuItem";
+            this.RotateToolStripMenuItem.Size = new System.Drawing.Size(78, 19);
+            this.RotateToolStripMenuItem.Text = "Повернуть";
             // 
             // MainForm
             // 
@@ -540,6 +548,7 @@
         private System.Windows.Forms.ToolStripMenuItem негативToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem повернутьНа90ПротивЧасовойToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem повернутьНа90ПоЧасовойToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem RotateToolStripMenuItem;
     }
 }
 
