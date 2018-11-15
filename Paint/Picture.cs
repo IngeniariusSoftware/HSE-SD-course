@@ -1,7 +1,6 @@
 ﻿namespace Paint
 {
     using System.Drawing;
-    using System.Drawing.Imaging;
     using System.Windows.Forms;
 
     public partial class Picture : Form
@@ -9,12 +8,13 @@
         public Picture()
         {
             InitializeComponent();
-            pictureBox.BackgroundImage = new Bitmap(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
+            pictureBox.BackgroundImage = new Bitmap(pictureBox.Width, pictureBox.Height);
         }
 
         private void PictureBox_MouseUp(object sender, MouseEventArgs e)
         {
             DrawingSystem.EndDrawing(pictureBox.BackgroundImage);
+            pictureBox.Image = null;
             pictureBox.Refresh();
         }
 
@@ -23,7 +23,7 @@
             if (DrawingSystem.IsDrawing)
             {
                 DrawingSystem.Drawing(e.Location);
-                pictureBox.Invalidate();
+                pictureBox.Refresh();
             }
         }
 
@@ -62,5 +62,13 @@
             EffectsSystem.SimpleSkeletonizationEffect.ApplyInPlace((Bitmap)pictureBox.BackgroundImage);
         }
 
+        private void Picture_SizeChanged(object sender, System.EventArgs e)
+        {
+            DrawingSystem.Buffer?.Dispose();
+            DrawingSystem.Buffer = (Bitmap)pictureBox.BackgroundImage.Clone();
+            pictureBox.BackgroundImage.Dispose();
+            pictureBox.BackgroundImage = new Bitmap(pictureBox.Width, pictureBox.Height);
+            DrawingSystem.EndDrawing(pictureBox.BackgroundImage);
+        }
     }
 }
