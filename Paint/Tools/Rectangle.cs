@@ -3,23 +3,18 @@
     using System;
     using System.Drawing;
 
-    public static class Rectangle
+    using Paint.Tools;
+
+    public class Rectangle : BaseTool
     {
-        private static Point startPosition;
-
-        public static void StartDrawing(Point cursor)
+        public override void Drawing(Point cursor)
         {
-            startPosition = cursor;
-        }
-
-        public static void Drawing(Graphics graphics, Pen pen, Point cursor)
-        {
-            graphics.DrawRectangle(
-                pen,
-                Math.Min(startPosition.X, cursor.X),
-                Math.Min(startPosition.Y, cursor.Y),
-                Math.Abs(cursor.X - startPosition.X),
-                Math.Abs(cursor.Y - startPosition.Y));
+            _graphics.DrawRectangle(
+                _pen,
+                Math.Min(_startPosition.X, cursor.X),
+                Math.Min(_startPosition.Y, cursor.Y),
+                Math.Abs(cursor.X - _startPosition.X),
+                Math.Abs(cursor.Y - _startPosition.Y));
         }
     }
 }
