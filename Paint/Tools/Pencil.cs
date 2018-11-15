@@ -2,20 +2,22 @@
 {
     using System.Drawing;
 
-    public static class Pencil
-    {
-        private static Point startPosition;
+    using Paint.Tools;
 
-        public static void StartDrawing(Graphics graphics, Pen pen, Point cursor)
+    public class Pencil : BaseTool
+    {
+        public override void StartDrawing(Graphics graphics, Pen pen, Point cursor)
         {
-            graphics.DrawLine(pen, startPosition.X, startPosition.Y, startPosition.X, startPosition.Y);
-            startPosition = cursor;
+            _pen = pen;
+            _graphics = graphics;
+            _startPosition = cursor;
+            Drawing(cursor);
         }
 
-        public static void Drawing(Graphics graphics, Pen pen, Point cursor)
+        public override void Drawing(Point cursor)
         {
-            graphics.DrawLine(pen, startPosition.X, startPosition.Y, cursor.X, cursor.Y);
-            startPosition = cursor;
+            _graphics.DrawLine(_pen, _startPosition.X, _startPosition.Y, cursor.X, cursor.Y);
+            _startPosition = cursor;
         }
     }
 }
