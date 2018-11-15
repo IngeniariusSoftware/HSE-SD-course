@@ -5,23 +5,16 @@
 
     using Paint.Tools;
 
-    public class Ellipse:BaseTool
+    public class Ellipse : BaseTool
     {
-        private Point startPosition;
-
-        public void StartDrawing(Graphics graphics, Pen pen, Point cursor):base(graphics, pen, cursor)
+        public override void Drawing(Point cursor)
         {
-
-        }
-
-        public void Drawing(Point cursor):base(cursor)
-        {
-            graphics.DrawEllipse(
-                pen,
-                Math.Min(startPosition.X, cursor.X),
-                Math.Min(startPosition.Y, cursor.Y),
-                Math.Abs(cursor.X - startPosition.X),
-                Math.Abs(cursor.Y - startPosition.Y));
+            _graphics.DrawEllipse(
+                _pen,
+                Math.Min(_startPosition.X, cursor.X),
+                Math.Min(_startPosition.Y, cursor.Y),
+                Math.Abs(cursor.X - _startPosition.X),
+                Math.Abs(cursor.Y - _startPosition.Y));
         }
     }
 }
