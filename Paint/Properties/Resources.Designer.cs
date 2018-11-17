@@ -73,6 +73,26 @@ namespace Paint.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap ClockwiseRotateIcon {
+            get {
+                object obj = ResourceManager.GetObject("ClockwiseRotateIcon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap CounterClockwiseRotateIcon {
+            get {
+                object obj = ResourceManager.GetObject("CounterClockwiseRotateIcon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap DiagonalIcon {
             get {
                 object obj = ResourceManager.GetObject("DiagonalIcon", resourceCulture);
@@ -96,6 +116,16 @@ namespace Paint.Properties {
         internal static System.Drawing.Bitmap EraserIcon {
             get {
                 object obj = ResourceManager.GetObject("EraserIcon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap HorizontalFlipIcon {
+            get {
+                object obj = ResourceManager.GetObject("HorizontalFlipIcon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -146,6 +176,26 @@ namespace Paint.Properties {
         internal static System.Drawing.Bitmap StarIcon {
             get {
                 object obj = ResourceManager.GetObject("StarIcon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap UndoIcon {
+            get {
+                object obj = ResourceManager.GetObject("UndoIcon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap VerticalFlipIcon {
+            get {
+                object obj = ResourceManager.GetObject("VerticalFlipIcon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

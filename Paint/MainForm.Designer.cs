@@ -30,6 +30,11 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.PaintPanel = new System.Windows.Forms.Panel();
+            this.VerticalFlipButton = new System.Windows.Forms.Button();
+            this.HorizontalFlipButton = new System.Windows.Forms.Button();
+            this.CounterClockwiseRotateButton = new System.Windows.Forms.Button();
+            this.RotateLabel = new System.Windows.Forms.Label();
+            this.SplitterFlip = new System.Windows.Forms.Splitter();
             this.LabelColor = new System.Windows.Forms.Label();
             this.LabelSize = new System.Windows.Forms.Label();
             this.TrackBarSize = new System.Windows.Forms.TrackBar();
@@ -73,6 +78,10 @@
             this.DropWindowMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.OrderWindowMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.RotateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ClockwiseRotateButton = new System.Windows.Forms.Button();
+            this.SplitterUndo = new System.Windows.Forms.Splitter();
+            this.UndoLabel = new System.Windows.Forms.Label();
+            this.UndoButton = new System.Windows.Forms.Button();
             this.PaintPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TrackBarSize)).BeginInit();
             this.PaintMenuStrip.SuspendLayout();
@@ -82,6 +91,15 @@
             // 
             this.PaintPanel.BackColor = System.Drawing.SystemColors.Control;
             this.PaintPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.PaintPanel.Controls.Add(this.UndoButton);
+            this.PaintPanel.Controls.Add(this.UndoLabel);
+            this.PaintPanel.Controls.Add(this.SplitterUndo);
+            this.PaintPanel.Controls.Add(this.ClockwiseRotateButton);
+            this.PaintPanel.Controls.Add(this.VerticalFlipButton);
+            this.PaintPanel.Controls.Add(this.HorizontalFlipButton);
+            this.PaintPanel.Controls.Add(this.CounterClockwiseRotateButton);
+            this.PaintPanel.Controls.Add(this.RotateLabel);
+            this.PaintPanel.Controls.Add(this.SplitterFlip);
             this.PaintPanel.Controls.Add(this.LabelColor);
             this.PaintPanel.Controls.Add(this.LabelSize);
             this.PaintPanel.Controls.Add(this.TrackBarSize);
@@ -105,6 +123,51 @@
             this.PaintPanel.Name = "PaintPanel";
             this.PaintPanel.Size = new System.Drawing.Size(1359, 91);
             this.PaintPanel.TabIndex = 4;
+            // 
+            // VerticalFlipButton
+            // 
+            this.VerticalFlipButton.Image = global::Paint.Properties.Resources.VerticalFlipIcon;
+            this.VerticalFlipButton.Location = new System.Drawing.Point(963, 10);
+            this.VerticalFlipButton.Name = "VerticalFlipButton";
+            this.VerticalFlipButton.Size = new System.Drawing.Size(40, 40);
+            this.VerticalFlipButton.TabIndex = 25;
+            this.VerticalFlipButton.UseVisualStyleBackColor = true;
+            // 
+            // HorizontalFlipButton
+            // 
+            this.HorizontalFlipButton.Image = global::Paint.Properties.Resources.HorizontalFlipIcon;
+            this.HorizontalFlipButton.Location = new System.Drawing.Point(1023, 10);
+            this.HorizontalFlipButton.Name = "HorizontalFlipButton";
+            this.HorizontalFlipButton.Size = new System.Drawing.Size(40, 40);
+            this.HorizontalFlipButton.TabIndex = 24;
+            this.HorizontalFlipButton.UseVisualStyleBackColor = true;
+            // 
+            // CounterClockwiseRotateButton
+            // 
+            this.CounterClockwiseRotateButton.Image = global::Paint.Properties.Resources.CounterClockwiseRotateIcon;
+            this.CounterClockwiseRotateButton.Location = new System.Drawing.Point(903, 10);
+            this.CounterClockwiseRotateButton.Name = "CounterClockwiseRotateButton";
+            this.CounterClockwiseRotateButton.Size = new System.Drawing.Size(40, 40);
+            this.CounterClockwiseRotateButton.TabIndex = 23;
+            this.CounterClockwiseRotateButton.UseVisualStyleBackColor = true;
+            // 
+            // RotateLabel
+            // 
+            this.RotateLabel.AutoSize = true;
+            this.RotateLabel.Location = new System.Drawing.Point(931, 64);
+            this.RotateLabel.Name = "RotateLabel";
+            this.RotateLabel.Size = new System.Drawing.Size(61, 13);
+            this.RotateLabel.TabIndex = 21;
+            this.RotateLabel.Text = "Повернуть";
+            // 
+            // SplitterFlip
+            // 
+            this.SplitterFlip.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.SplitterFlip.Location = new System.Drawing.Point(820, 0);
+            this.SplitterFlip.Name = "SplitterFlip";
+            this.SplitterFlip.Size = new System.Drawing.Size(270, 87);
+            this.SplitterFlip.TabIndex = 20;
+            this.SplitterFlip.TabStop = false;
             // 
             // LabelColor
             // 
@@ -301,37 +364,37 @@
             // NewFileMenuItem
             // 
             this.NewFileMenuItem.Name = "NewFileMenuItem";
-            this.NewFileMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.NewFileMenuItem.Size = new System.Drawing.Size(162, 22);
             this.NewFileMenuItem.Text = "Новый";
             this.NewFileMenuItem.Click += new System.EventHandler(this.NewFileMenuItem_Click);
             // 
             // OpenFileMenuItem
             // 
             this.OpenFileMenuItem.Name = "OpenFileMenuItem";
-            this.OpenFileMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.OpenFileMenuItem.Size = new System.Drawing.Size(162, 22);
             this.OpenFileMenuItem.Text = "Открыть…";
             // 
             // SaveFileAsMenuItem
             // 
             this.SaveFileAsMenuItem.Name = "SaveFileAsMenuItem";
-            this.SaveFileAsMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.SaveFileAsMenuItem.Size = new System.Drawing.Size(162, 22);
             this.SaveFileAsMenuItem.Text = "Сохранить как…";
             // 
             // SaveFileMenuItem
             // 
             this.SaveFileMenuItem.Name = "SaveFileMenuItem";
-            this.SaveFileMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.SaveFileMenuItem.Size = new System.Drawing.Size(162, 22);
             this.SaveFileMenuItem.Text = "Сохранить";
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(159, 6);
             // 
             // ExitMenuItem
             // 
             this.ExitMenuItem.Name = "ExitMenuItem";
-            this.ExitMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.ExitMenuItem.Size = new System.Drawing.Size(162, 22);
             this.ExitMenuItem.Text = "Выход";
             // 
             // EffectsMenuItem
@@ -480,6 +543,42 @@
             this.RotateToolStripMenuItem.Size = new System.Drawing.Size(78, 19);
             this.RotateToolStripMenuItem.Text = "Повернуть";
             // 
+            // ClockwiseRotateButton
+            // 
+            this.ClockwiseRotateButton.Image = global::Paint.Properties.Resources.ClockwiseRotateIcon;
+            this.ClockwiseRotateButton.Location = new System.Drawing.Point(843, 10);
+            this.ClockwiseRotateButton.Name = "ClockwiseRotateButton";
+            this.ClockwiseRotateButton.Size = new System.Drawing.Size(40, 40);
+            this.ClockwiseRotateButton.TabIndex = 26;
+            this.ClockwiseRotateButton.UseVisualStyleBackColor = true;
+            // 
+            // SplitterUndo
+            // 
+            this.SplitterUndo.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.SplitterUndo.Location = new System.Drawing.Point(1090, 0);
+            this.SplitterUndo.Name = "SplitterUndo";
+            this.SplitterUndo.Size = new System.Drawing.Size(80, 87);
+            this.SplitterUndo.TabIndex = 27;
+            this.SplitterUndo.TabStop = false;
+            // 
+            // UndoLabel
+            // 
+            this.UndoLabel.AutoSize = true;
+            this.UndoLabel.Location = new System.Drawing.Point(1106, 64);
+            this.UndoLabel.Name = "UndoLabel";
+            this.UndoLabel.Size = new System.Drawing.Size(57, 13);
+            this.UndoLabel.TabIndex = 28;
+            this.UndoLabel.Text = "Отменить";
+            // 
+            // UndoButton
+            // 
+            this.UndoButton.Image = global::Paint.Properties.Resources.UndoIcon;
+            this.UndoButton.Location = new System.Drawing.Point(1110, 10);
+            this.UndoButton.Name = "UndoButton";
+            this.UndoButton.Size = new System.Drawing.Size(40, 40);
+            this.UndoButton.TabIndex = 29;
+            this.UndoButton.UseVisualStyleBackColor = true;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -549,6 +648,15 @@
         private System.Windows.Forms.ToolStripMenuItem повернутьНа90ПротивЧасовойToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem повернутьНа90ПоЧасовойToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem RotateToolStripMenuItem;
+        private System.Windows.Forms.Button VerticalFlipButton;
+        private System.Windows.Forms.Button HorizontalFlipButton;
+        private System.Windows.Forms.Button CounterClockwiseRotateButton;
+        private System.Windows.Forms.Label RotateLabel;
+        private System.Windows.Forms.Splitter SplitterFlip;
+        private System.Windows.Forms.Button UndoButton;
+        private System.Windows.Forms.Label UndoLabel;
+        private System.Windows.Forms.Splitter SplitterUndo;
+        private System.Windows.Forms.Button ClockwiseRotateButton;
     }
 }
 
