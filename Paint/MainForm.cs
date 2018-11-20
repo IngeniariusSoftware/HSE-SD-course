@@ -167,5 +167,41 @@
                 childPaintForm.Refresh();
             }
         }
+
+        private void FlipRotateButton_Click(object sender, EventArgs e)
+        {
+            Picture childPaintForm = ActiveMdiChild as Picture;
+            Control button = (Control)sender;
+            if (childPaintForm != null)
+            {
+                switch (true)
+                {
+                    case true when button.Name == ClockwiseRotateButton.Name:
+                        {
+                            childPaintForm.RotateClockwise();
+                            break;
+                        }
+                    case true when button.Name == CounterClockwiseRotateButton.Name:
+                        {
+                            childPaintForm.RotateCounterClockwise();
+                            break;
+                        }
+
+                    case true when button.Name == HorizontalFlipButton.Name:
+                        {
+                            childPaintForm.FlipHorizontal();
+                            break;
+                        }
+
+                    case true when button.Name == VerticalFlipButton.Name:
+                        {
+                            childPaintForm.FlipVertical();
+                            break;
+                        }
+                }
+
+                childPaintForm.Refresh();
+            }
+        }
     }
 }

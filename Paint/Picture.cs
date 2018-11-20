@@ -1,5 +1,6 @@
 ﻿namespace Paint
 {
+    using System;
     using System.Drawing;
     using System.Windows.Forms;
 
@@ -60,6 +61,34 @@
         public void ApplyStampingEffect()
         {
             EffectsSystem.StampingEffect.ApplyInPlace((Bitmap)pictureBox.BackgroundImage);
+        }
+
+        public void FlipVertical()
+        {
+            pictureBox?.BackgroundImage.RotateFlip(RotateFlipType.RotateNoneFlipY);
+        }
+
+        public void FlipHorizontal()
+        {
+            pictureBox?.BackgroundImage.RotateFlip(RotateFlipType.RotateNoneFlipX);
+        }
+
+        public void RotateClockwise()
+        {
+            if (pictureBox.BackgroundImage != null)
+            {
+                pictureBox.BackgroundImage.RotateFlip(RotateFlipType.Rotate90FlipNone);
+                Size = new Size(Size.Height, Size.Width);
+            }
+        }
+
+        public void RotateCounterClockwise()
+        {
+            if (pictureBox.BackgroundImage != null)
+            {
+                pictureBox.BackgroundImage.RotateFlip(RotateFlipType.Rotate270FlipNone);
+                Size = new Size(Size.Height, Size.Width);
+            }
         }
 
         private void Picture_SizeChanged(object sender, System.EventArgs e)

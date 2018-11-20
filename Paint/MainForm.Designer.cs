@@ -140,6 +140,7 @@
             // SplitterUndo
             // 
             this.SplitterUndo.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.SplitterUndo.Enabled = false;
             this.SplitterUndo.Location = new System.Drawing.Point(1090, 0);
             this.SplitterUndo.Name = "SplitterUndo";
             this.SplitterUndo.Size = new System.Drawing.Size(80, 87);
@@ -154,6 +155,7 @@
             this.ClockwiseRotateButton.Size = new System.Drawing.Size(40, 40);
             this.ClockwiseRotateButton.TabIndex = 26;
             this.ClockwiseRotateButton.UseVisualStyleBackColor = true;
+            this.ClockwiseRotateButton.Click += new System.EventHandler(this.FlipRotateButton_Click);
             // 
             // VerticalFlipButton
             // 
@@ -163,6 +165,7 @@
             this.VerticalFlipButton.Size = new System.Drawing.Size(40, 40);
             this.VerticalFlipButton.TabIndex = 25;
             this.VerticalFlipButton.UseVisualStyleBackColor = true;
+            this.VerticalFlipButton.Click += new System.EventHandler(this.FlipRotateButton_Click);
             // 
             // HorizontalFlipButton
             // 
@@ -172,6 +175,7 @@
             this.HorizontalFlipButton.Size = new System.Drawing.Size(40, 40);
             this.HorizontalFlipButton.TabIndex = 24;
             this.HorizontalFlipButton.UseVisualStyleBackColor = true;
+            this.HorizontalFlipButton.Click += new System.EventHandler(this.FlipRotateButton_Click);
             // 
             // CounterClockwiseRotateButton
             // 
@@ -181,6 +185,7 @@
             this.CounterClockwiseRotateButton.Size = new System.Drawing.Size(40, 40);
             this.CounterClockwiseRotateButton.TabIndex = 23;
             this.CounterClockwiseRotateButton.UseVisualStyleBackColor = true;
+            this.CounterClockwiseRotateButton.Click += new System.EventHandler(this.FlipRotateButton_Click);
             // 
             // RotateLabel
             // 
@@ -194,6 +199,7 @@
             // SplitterFlip
             // 
             this.SplitterFlip.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.SplitterFlip.Enabled = false;
             this.SplitterFlip.Location = new System.Drawing.Point(820, 0);
             this.SplitterFlip.Name = "SplitterFlip";
             this.SplitterFlip.Size = new System.Drawing.Size(270, 87);
@@ -462,42 +468,42 @@
             // BlurEffectMenuItem
             // 
             this.BlurEffectMenuItem.Name = "BlurEffectMenuItem";
-            this.BlurEffectMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.BlurEffectMenuItem.Size = new System.Drawing.Size(168, 22);
             this.BlurEffectMenuItem.Text = "Размытие";
             this.BlurEffectMenuItem.Click += new System.EventHandler(this.EffectMenuItem_Click);
             // 
             // SharpnessEffectMenuItem
             // 
             this.SharpnessEffectMenuItem.Name = "SharpnessEffectMenuItem";
-            this.SharpnessEffectMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.SharpnessEffectMenuItem.Size = new System.Drawing.Size(168, 22);
             this.SharpnessEffectMenuItem.Text = "Резкость";
             this.SharpnessEffectMenuItem.Click += new System.EventHandler(this.EffectMenuItem_Click);
             // 
             // SepiaToolStripMenuItem
             // 
             this.SepiaToolStripMenuItem.Name = "SepiaToolStripMenuItem";
-            this.SepiaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.SepiaToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
             this.SepiaToolStripMenuItem.Text = "Сепия";
             this.SepiaToolStripMenuItem.Click += new System.EventHandler(this.EffectMenuItem_Click);
             // 
             // GreenNegativeToolStripMenuItem
             // 
             this.GreenNegativeToolStripMenuItem.Name = "GreenNegativeToolStripMenuItem";
-            this.GreenNegativeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.GreenNegativeToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
             this.GreenNegativeToolStripMenuItem.Text = "Зеленый негатив";
             this.GreenNegativeToolStripMenuItem.Click += new System.EventHandler(this.EffectMenuItem_Click);
             // 
             // StampingToolStripMenuItem
             // 
             this.StampingToolStripMenuItem.Name = "StampingToolStripMenuItem";
-            this.StampingToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.StampingToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
             this.StampingToolStripMenuItem.Text = "Тиснение";
             this.StampingToolStripMenuItem.Click += new System.EventHandler(this.EffectMenuItem_Click);
             // 
             // NegativeToolStripMenuItem
             // 
             this.NegativeToolStripMenuItem.Name = "NegativeToolStripMenuItem";
-            this.NegativeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.NegativeToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
             this.NegativeToolStripMenuItem.Text = "Негатив";
             this.NegativeToolStripMenuItem.Click += new System.EventHandler(this.EffectMenuItem_Click);
             // 
