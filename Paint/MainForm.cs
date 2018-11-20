@@ -123,7 +123,7 @@
 
         private void EffectMenuItem_Click(object sender, EventArgs e)
         {
-             Picture childPaintForm = ActiveMdiChild as Picture;
+            Picture childPaintForm = ActiveMdiChild as Picture;
             if (childPaintForm != null)
             {
                 switch (true)
@@ -139,15 +139,27 @@
                             break;
                         }
 
-                    case true when sender.ToString() == MirrorXEffectMenuItem.Text:
+                    case true when sender.ToString() == SepiaToolStripMenuItem.Text:
                         {
-                            childPaintForm.ApplyMirrorXEffect();
+                            childPaintForm.ApplySepiaEffect();
                             break;
                         }
 
-                    case true when sender.ToString() == MirrorYEffectMenuItem.Text:
+                    case true when sender.ToString() == NegativeToolStripMenuItem.Text:
                         {
-                            childPaintForm.ApplyMirrorYEffect();
+                            childPaintForm.ApplyNegativeEffect();
+                            break;
+                        }
+
+                    case true when sender.ToString() == GreenNegativeToolStripMenuItem.Text:
+                        {
+                            childPaintForm.ApplyGreenNegativeEffect();
+                            break;
+                        }
+
+                    case true when sender.ToString() == StampingToolStripMenuItem.Text:
+                        {
+                            childPaintForm.ApplyStampingEffect();
                             break;
                         }
                 }
