@@ -42,24 +42,24 @@
             EffectsSystem.GaussianSharpenEffect.ApplyInPlace((Bitmap)pictureBox.BackgroundImage);
         }
 
-        public void ApplyMirrorXEffect()
-        {
-            EffectsSystem.MirrorXEffect.ApplyInPlace((Bitmap)pictureBox.BackgroundImage);
-        }
-
-        public void ApplyMirrorYEffect()
-        {
-            EffectsSystem.MirrorYEffect.ApplyInPlace((Bitmap)pictureBox.BackgroundImage);
-        }
-
         public void ApplySepiaEffect()
         {
             EffectsSystem.SepiaEffect.ApplyInPlace((Bitmap)pictureBox.BackgroundImage);
         }
 
-        public void ApplySimpleSkeletonizationEffect()
+        public void ApplyNegativeEffect()
         {
-            EffectsSystem.SimpleSkeletonizationEffect.ApplyInPlace((Bitmap)pictureBox.BackgroundImage);
+            EffectsSystem.NegativeEffect.ApplyInPlace((Bitmap)pictureBox.BackgroundImage);
+        }
+
+        public void ApplyGreenNegativeEffect()
+        {
+            EffectsSystem.GreenNegativeEffect.ApplyInPlace((Bitmap)pictureBox.BackgroundImage);
+        }
+
+        public void ApplyStampingEffect()
+        {
+            EffectsSystem.StampingEffect.ApplyInPlace((Bitmap)pictureBox.BackgroundImage);
         }
 
         private void Picture_SizeChanged(object sender, System.EventArgs e)
