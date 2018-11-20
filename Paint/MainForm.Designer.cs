@@ -30,6 +30,10 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.PaintPanel = new System.Windows.Forms.Panel();
+            this.UndoButton = new System.Windows.Forms.Button();
+            this.UndoLabel = new System.Windows.Forms.Label();
+            this.SplitterUndo = new System.Windows.Forms.Splitter();
+            this.ClockwiseRotateButton = new System.Windows.Forms.Button();
             this.VerticalFlipButton = new System.Windows.Forms.Button();
             this.HorizontalFlipButton = new System.Windows.Forms.Button();
             this.CounterClockwiseRotateButton = new System.Windows.Forms.Button();
@@ -60,28 +64,19 @@
             this.SaveFileMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.ExitMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.PaintMenuStrip = new System.Windows.Forms.MenuStrip();
             this.EffectsMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.BlurEffectMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.SharpnessEffectMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.сепияToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.зеленыйНегативToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.теснениеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.негативToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.MirrorXEffectMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.MirrorYEffectMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.повернутьНа90ПротивЧасовойToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.повернутьНа90ПоЧасовойToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.PaintMenuStrip = new System.Windows.Forms.MenuStrip();
+            this.SepiaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.GreenNegativeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.StampingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.NegativeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.WindowMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.CascadeWindowMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.LeftWindowMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DropWindowMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.OrderWindowMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.RotateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ClockwiseRotateButton = new System.Windows.Forms.Button();
-            this.SplitterUndo = new System.Windows.Forms.Splitter();
-            this.UndoLabel = new System.Windows.Forms.Label();
-            this.UndoButton = new System.Windows.Forms.Button();
             this.PaintPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TrackBarSize)).BeginInit();
             this.PaintMenuStrip.SuspendLayout();
@@ -123,6 +118,42 @@
             this.PaintPanel.Name = "PaintPanel";
             this.PaintPanel.Size = new System.Drawing.Size(1359, 91);
             this.PaintPanel.TabIndex = 4;
+            // 
+            // UndoButton
+            // 
+            this.UndoButton.Image = global::Paint.Properties.Resources.UndoIcon;
+            this.UndoButton.Location = new System.Drawing.Point(1110, 10);
+            this.UndoButton.Name = "UndoButton";
+            this.UndoButton.Size = new System.Drawing.Size(40, 40);
+            this.UndoButton.TabIndex = 29;
+            this.UndoButton.UseVisualStyleBackColor = true;
+            // 
+            // UndoLabel
+            // 
+            this.UndoLabel.AutoSize = true;
+            this.UndoLabel.Location = new System.Drawing.Point(1106, 64);
+            this.UndoLabel.Name = "UndoLabel";
+            this.UndoLabel.Size = new System.Drawing.Size(57, 13);
+            this.UndoLabel.TabIndex = 28;
+            this.UndoLabel.Text = "Отменить";
+            // 
+            // SplitterUndo
+            // 
+            this.SplitterUndo.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.SplitterUndo.Location = new System.Drawing.Point(1090, 0);
+            this.SplitterUndo.Name = "SplitterUndo";
+            this.SplitterUndo.Size = new System.Drawing.Size(80, 87);
+            this.SplitterUndo.TabIndex = 27;
+            this.SplitterUndo.TabStop = false;
+            // 
+            // ClockwiseRotateButton
+            // 
+            this.ClockwiseRotateButton.Image = global::Paint.Properties.Resources.ClockwiseRotateIcon;
+            this.ClockwiseRotateButton.Location = new System.Drawing.Point(843, 10);
+            this.ClockwiseRotateButton.Name = "ClockwiseRotateButton";
+            this.ClockwiseRotateButton.Size = new System.Drawing.Size(40, 40);
+            this.ClockwiseRotateButton.TabIndex = 26;
+            this.ClockwiseRotateButton.UseVisualStyleBackColor = true;
             // 
             // VerticalFlipButton
             // 
@@ -397,20 +428,32 @@
             this.ExitMenuItem.Size = new System.Drawing.Size(162, 22);
             this.ExitMenuItem.Text = "Выход";
             // 
+            // PaintMenuStrip
+            // 
+            this.PaintMenuStrip.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.PaintMenuStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Visible;
+            this.PaintMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.FileMenuItem,
+            this.EffectsMenuItem,
+            this.WindowMenuItem});
+            this.PaintMenuStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Flow;
+            this.PaintMenuStrip.Location = new System.Drawing.Point(0, 0);
+            this.PaintMenuStrip.Name = "PaintMenuStrip";
+            this.PaintMenuStrip.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.PaintMenuStrip.Size = new System.Drawing.Size(1359, 23);
+            this.PaintMenuStrip.TabIndex = 1;
+            this.PaintMenuStrip.Text = "Меню";
+            // 
             // EffectsMenuItem
             // 
             this.EffectsMenuItem.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.EffectsMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.BlurEffectMenuItem,
             this.SharpnessEffectMenuItem,
-            this.сепияToolStripMenuItem,
-            this.зеленыйНегативToolStripMenuItem,
-            this.теснениеToolStripMenuItem,
-            this.негативToolStripMenuItem,
-            this.MirrorXEffectMenuItem,
-            this.MirrorYEffectMenuItem,
-            this.повернутьНа90ПротивЧасовойToolStripMenuItem,
-            this.повернутьНа90ПоЧасовойToolStripMenuItem});
+            this.SepiaToolStripMenuItem,
+            this.GreenNegativeToolStripMenuItem,
+            this.StampingToolStripMenuItem,
+            this.NegativeToolStripMenuItem});
             this.EffectsMenuItem.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.EffectsMenuItem.Name = "EffectsMenuItem";
             this.EffectsMenuItem.Size = new System.Drawing.Size(70, 19);
@@ -419,83 +462,44 @@
             // BlurEffectMenuItem
             // 
             this.BlurEffectMenuItem.Name = "BlurEffectMenuItem";
-            this.BlurEffectMenuItem.Size = new System.Drawing.Size(255, 22);
+            this.BlurEffectMenuItem.Size = new System.Drawing.Size(180, 22);
             this.BlurEffectMenuItem.Text = "Размытие";
             this.BlurEffectMenuItem.Click += new System.EventHandler(this.EffectMenuItem_Click);
             // 
             // SharpnessEffectMenuItem
             // 
             this.SharpnessEffectMenuItem.Name = "SharpnessEffectMenuItem";
-            this.SharpnessEffectMenuItem.Size = new System.Drawing.Size(255, 22);
+            this.SharpnessEffectMenuItem.Size = new System.Drawing.Size(180, 22);
             this.SharpnessEffectMenuItem.Text = "Резкость";
             this.SharpnessEffectMenuItem.Click += new System.EventHandler(this.EffectMenuItem_Click);
             // 
-            // сепияToolStripMenuItem
+            // SepiaToolStripMenuItem
             // 
-            this.сепияToolStripMenuItem.Name = "сепияToolStripMenuItem";
-            this.сепияToolStripMenuItem.Size = new System.Drawing.Size(255, 22);
-            this.сепияToolStripMenuItem.Text = "Сепия";
+            this.SepiaToolStripMenuItem.Name = "SepiaToolStripMenuItem";
+            this.SepiaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.SepiaToolStripMenuItem.Text = "Сепия";
+            this.SepiaToolStripMenuItem.Click += new System.EventHandler(this.EffectMenuItem_Click);
             // 
-            // зеленыйНегативToolStripMenuItem
+            // GreenNegativeToolStripMenuItem
             // 
-            this.зеленыйНегативToolStripMenuItem.Name = "зеленыйНегативToolStripMenuItem";
-            this.зеленыйНегативToolStripMenuItem.Size = new System.Drawing.Size(255, 22);
-            this.зеленыйНегативToolStripMenuItem.Text = "Зеленый негатив";
+            this.GreenNegativeToolStripMenuItem.Name = "GreenNegativeToolStripMenuItem";
+            this.GreenNegativeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.GreenNegativeToolStripMenuItem.Text = "Зеленый негатив";
+            this.GreenNegativeToolStripMenuItem.Click += new System.EventHandler(this.EffectMenuItem_Click);
             // 
-            // теснениеToolStripMenuItem
+            // StampingToolStripMenuItem
             // 
-            this.теснениеToolStripMenuItem.Name = "теснениеToolStripMenuItem";
-            this.теснениеToolStripMenuItem.Size = new System.Drawing.Size(255, 22);
-            this.теснениеToolStripMenuItem.Text = "Тиснение";
+            this.StampingToolStripMenuItem.Name = "StampingToolStripMenuItem";
+            this.StampingToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.StampingToolStripMenuItem.Text = "Тиснение";
+            this.StampingToolStripMenuItem.Click += new System.EventHandler(this.EffectMenuItem_Click);
             // 
-            // негативToolStripMenuItem
+            // NegativeToolStripMenuItem
             // 
-            this.негативToolStripMenuItem.Name = "негативToolStripMenuItem";
-            this.негативToolStripMenuItem.Size = new System.Drawing.Size(255, 22);
-            this.негативToolStripMenuItem.Text = "Негатив";
-            // 
-            // MirrorXEffectMenuItem
-            // 
-            this.MirrorXEffectMenuItem.Name = "MirrorXEffectMenuItem";
-            this.MirrorXEffectMenuItem.Size = new System.Drawing.Size(255, 22);
-            this.MirrorXEffectMenuItem.Text = "Отразить по горизонтали";
-            this.MirrorXEffectMenuItem.Click += new System.EventHandler(this.EffectMenuItem_Click);
-            // 
-            // MirrorYEffectMenuItem
-            // 
-            this.MirrorYEffectMenuItem.Name = "MirrorYEffectMenuItem";
-            this.MirrorYEffectMenuItem.Size = new System.Drawing.Size(255, 22);
-            this.MirrorYEffectMenuItem.Text = "Отразить по вертикали";
-            this.MirrorYEffectMenuItem.Click += new System.EventHandler(this.EffectMenuItem_Click);
-            // 
-            // повернутьНа90ПротивЧасовойToolStripMenuItem
-            // 
-            this.повернутьНа90ПротивЧасовойToolStripMenuItem.Name = "повернутьНа90ПротивЧасовойToolStripMenuItem";
-            this.повернутьНа90ПротивЧасовойToolStripMenuItem.Size = new System.Drawing.Size(255, 22);
-            this.повернутьНа90ПротивЧасовойToolStripMenuItem.Text = "Повернуть на 90 против часовой";
-            // 
-            // повернутьНа90ПоЧасовойToolStripMenuItem
-            // 
-            this.повернутьНа90ПоЧасовойToolStripMenuItem.Name = "повернутьНа90ПоЧасовойToolStripMenuItem";
-            this.повернутьНа90ПоЧасовойToolStripMenuItem.Size = new System.Drawing.Size(255, 22);
-            this.повернутьНа90ПоЧасовойToolStripMenuItem.Text = "Повернуть на 90 по часовой";
-            // 
-            // PaintMenuStrip
-            // 
-            this.PaintMenuStrip.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.PaintMenuStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Visible;
-            this.PaintMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.FileMenuItem,
-            this.EffectsMenuItem,
-            this.WindowMenuItem,
-            this.RotateToolStripMenuItem});
-            this.PaintMenuStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Flow;
-            this.PaintMenuStrip.Location = new System.Drawing.Point(0, 0);
-            this.PaintMenuStrip.Name = "PaintMenuStrip";
-            this.PaintMenuStrip.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.PaintMenuStrip.Size = new System.Drawing.Size(1359, 23);
-            this.PaintMenuStrip.TabIndex = 1;
-            this.PaintMenuStrip.Text = "Меню";
+            this.NegativeToolStripMenuItem.Name = "NegativeToolStripMenuItem";
+            this.NegativeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.NegativeToolStripMenuItem.Text = "Негатив";
+            this.NegativeToolStripMenuItem.Click += new System.EventHandler(this.EffectMenuItem_Click);
             // 
             // WindowMenuItem
             // 
@@ -537,48 +541,6 @@
             this.OrderWindowMenuItem.Text = "Упорядочить значки";
             this.OrderWindowMenuItem.Click += new System.EventHandler(this.ChangeWindowPosition_Click);
             // 
-            // RotateToolStripMenuItem
-            // 
-            this.RotateToolStripMenuItem.Name = "RotateToolStripMenuItem";
-            this.RotateToolStripMenuItem.Size = new System.Drawing.Size(78, 19);
-            this.RotateToolStripMenuItem.Text = "Повернуть";
-            // 
-            // ClockwiseRotateButton
-            // 
-            this.ClockwiseRotateButton.Image = global::Paint.Properties.Resources.ClockwiseRotateIcon;
-            this.ClockwiseRotateButton.Location = new System.Drawing.Point(843, 10);
-            this.ClockwiseRotateButton.Name = "ClockwiseRotateButton";
-            this.ClockwiseRotateButton.Size = new System.Drawing.Size(40, 40);
-            this.ClockwiseRotateButton.TabIndex = 26;
-            this.ClockwiseRotateButton.UseVisualStyleBackColor = true;
-            // 
-            // SplitterUndo
-            // 
-            this.SplitterUndo.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.SplitterUndo.Location = new System.Drawing.Point(1090, 0);
-            this.SplitterUndo.Name = "SplitterUndo";
-            this.SplitterUndo.Size = new System.Drawing.Size(80, 87);
-            this.SplitterUndo.TabIndex = 27;
-            this.SplitterUndo.TabStop = false;
-            // 
-            // UndoLabel
-            // 
-            this.UndoLabel.AutoSize = true;
-            this.UndoLabel.Location = new System.Drawing.Point(1106, 64);
-            this.UndoLabel.Name = "UndoLabel";
-            this.UndoLabel.Size = new System.Drawing.Size(57, 13);
-            this.UndoLabel.TabIndex = 28;
-            this.UndoLabel.Text = "Отменить";
-            // 
-            // UndoButton
-            // 
-            this.UndoButton.Image = global::Paint.Properties.Resources.UndoIcon;
-            this.UndoButton.Location = new System.Drawing.Point(1110, 10);
-            this.UndoButton.Name = "UndoButton";
-            this.UndoButton.Size = new System.Drawing.Size(40, 40);
-            this.UndoButton.TabIndex = 29;
-            this.UndoButton.UseVisualStyleBackColor = true;
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -612,8 +574,6 @@
         private System.Windows.Forms.ToolStripMenuItem SaveFileMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem ExitMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem EffectsMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem BlurEffectMenuItem;
         private System.Windows.Forms.MenuStrip PaintMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem WindowMenuItem;
         private System.Windows.Forms.ToolStripMenuItem CascadeWindowMenuItem;
@@ -638,16 +598,6 @@
         private System.Windows.Forms.Splitter SplitterColor;
         private System.Windows.Forms.Label LabelSize;
         private System.Windows.Forms.TrackBar TrackBarSize;
-        private System.Windows.Forms.ToolStripMenuItem SharpnessEffectMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem MirrorXEffectMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem MirrorYEffectMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem сепияToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem зеленыйНегативToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem теснениеToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem негативToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem повернутьНа90ПротивЧасовойToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem повернутьНа90ПоЧасовойToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem RotateToolStripMenuItem;
         private System.Windows.Forms.Button VerticalFlipButton;
         private System.Windows.Forms.Button HorizontalFlipButton;
         private System.Windows.Forms.Button CounterClockwiseRotateButton;
@@ -657,6 +607,13 @@
         private System.Windows.Forms.Label UndoLabel;
         private System.Windows.Forms.Splitter SplitterUndo;
         private System.Windows.Forms.Button ClockwiseRotateButton;
+        private System.Windows.Forms.ToolStripMenuItem EffectsMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem BlurEffectMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem SharpnessEffectMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem SepiaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem GreenNegativeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem StampingToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem NegativeToolStripMenuItem;
     }
 }
 
