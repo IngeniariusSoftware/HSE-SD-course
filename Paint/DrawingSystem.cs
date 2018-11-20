@@ -73,11 +73,20 @@
         {
             _graphics?.Dispose();
             _graphics = Graphics.FromImage(lastImage);
-            _graphics.DrawImage(Buffer, 0, 0);
+            if (Buffer != null)
+            {
+                _graphics.DrawImage(Buffer, 0, 0);
+            }
+
             _graphics.Dispose();
-            _graphics = Graphics.FromImage(Buffer);
-            _graphics.Dispose();
-            Buffer.Dispose();
+            if (Buffer != null)
+            {
+                _graphics = Graphics.FromImage(Buffer);
+                _graphics.Dispose();
+                Buffer.Dispose();
+                Buffer = null;
+            }
+
             IsDrawing = false;
         }
 
