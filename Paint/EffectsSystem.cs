@@ -13,13 +13,20 @@
 
         public static Negative NegativeEffect = new Negative();
 
-        public static Stamping StampingEffect = new Stamping();
+        public static WaterWave WaterWaveEffect = new WaterWave();
+
+        public static Jitter JitterEffect = new Jitter();
+
+        public static AdditiveNoise AdditiveNoiseEffect = new AdditiveNoise();
+
+        private static int[,] _kernelMatrix = { { -2, -1, 0 }, { -1, 1, 1 }, { 0, 1, 2 } };
+
+        public static Convolution ConvolutionEffect = new Convolution(_kernelMatrix);
 
         public class Negative
         {
             public void ApplyInPlace(Bitmap image)
             {
-
                 for (int y = 0; y < image.Height; y++)
                 {
                     for (int x = 0; x < image.Width; x++)
@@ -38,14 +45,6 @@
                         }
                     }
                 }
-            }
-        }
-
-        public class Stamping
-        {
-            public void ApplyInPlace(Bitmap image)
-            {
-                
             }
         }
     }

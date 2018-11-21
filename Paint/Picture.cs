@@ -52,9 +52,28 @@
             EffectsSystem.NegativeEffect.ApplyInPlace((Bitmap)pictureBox.BackgroundImage);
         }
 
-        public void ApplyStampingEffect()
+        public void ApplyWaterWaveEffect()
         {
-            EffectsSystem.StampingEffect.ApplyInPlace((Bitmap)pictureBox.BackgroundImage);
+            pictureBox.Image = EffectsSystem.WaterWaveEffect.Apply((Bitmap)pictureBox.BackgroundImage);
+            pictureBox.BackgroundImage.Dispose();
+            pictureBox.BackgroundImage = (Image)pictureBox.Image.Clone();
+            pictureBox.Image.Dispose();
+            pictureBox.Image = null;
+        }
+
+        public void ApplyJitterEffect()
+        {
+            EffectsSystem.JitterEffect.ApplyInPlace((Bitmap)pictureBox.BackgroundImage);
+        }
+
+        public void ApplyAdditiveNoiseEffect()
+        {
+            EffectsSystem.AdditiveNoiseEffect.ApplyInPlace((Bitmap)pictureBox.BackgroundImage);
+        }
+
+        public void ApplyConvolutionEffect()
+        {
+            EffectsSystem.ConvolutionEffect.ApplyInPlace((Bitmap)pictureBox.BackgroundImage);
         }
 
         public void FlipVertical()

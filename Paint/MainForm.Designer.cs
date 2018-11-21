@@ -76,6 +76,10 @@
             this.LeftWindowMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DropWindowMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.OrderWindowMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.WaweToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.PixellateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.JitterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.NoiseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.PaintPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TrackBarSize)).BeginInit();
             this.PaintMenuStrip.SuspendLayout();
@@ -457,7 +461,11 @@
             this.SharpnessEffectMenuItem,
             this.SepiaToolStripMenuItem,
             this.StampingToolStripMenuItem,
-            this.NegativeToolStripMenuItem});
+            this.NegativeToolStripMenuItem,
+            this.WaweToolStripMenuItem,
+            this.PixellateToolStripMenuItem,
+            this.JitterToolStripMenuItem,
+            this.NoiseToolStripMenuItem});
             this.EffectsMenuItem.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.EffectsMenuItem.Name = "EffectsMenuItem";
             this.EffectsMenuItem.Size = new System.Drawing.Size(70, 19);
@@ -538,6 +546,34 @@
             this.OrderWindowMenuItem.Text = "Упорядочить значки";
             this.OrderWindowMenuItem.Click += new System.EventHandler(this.ChangeWindowPosition_Click);
             // 
+            // WaweToolStripMenuItem
+            // 
+            this.WaweToolStripMenuItem.Name = "WaweToolStripMenuItem";
+            this.WaweToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.WaweToolStripMenuItem.Text = "Волнистость";
+            this.WaweToolStripMenuItem.Click += new System.EventHandler(this.EffectMenuItem_Click);
+            // 
+            // PixellateToolStripMenuItem
+            // 
+            this.PixellateToolStripMenuItem.Name = "PixellateToolStripMenuItem";
+            this.PixellateToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.PixellateToolStripMenuItem.Text = "Рельефность";
+            this.PixellateToolStripMenuItem.Click += new System.EventHandler(this.EffectMenuItem_Click);
+            // 
+            // JitterToolStripMenuItem
+            // 
+            this.JitterToolStripMenuItem.Name = "JitterToolStripMenuItem";
+            this.JitterToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.JitterToolStripMenuItem.Text = "Акварель";
+            this.JitterToolStripMenuItem.Click += new System.EventHandler(this.EffectMenuItem_Click);
+            // 
+            // NoiseToolStripMenuItem
+            // 
+            this.NoiseToolStripMenuItem.Name = "NoiseToolStripMenuItem";
+            this.NoiseToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.NoiseToolStripMenuItem.Text = "Шум";
+            this.NoiseToolStripMenuItem.Click += new System.EventHandler(this.EffectMenuItem_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -610,6 +646,10 @@
         private System.Windows.Forms.ToolStripMenuItem SepiaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem StampingToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem NegativeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem WaweToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem PixellateToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem JitterToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem NoiseToolStripMenuItem;
     }
 }
 

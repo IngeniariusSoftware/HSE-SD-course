@@ -151,9 +151,21 @@
                             break;
                         }
 
-                    case true when sender.ToString() == StampingToolStripMenuItem.Text:
+                    case true when sender.ToString() == JitterToolStripMenuItem.Text:
                         {
-                            childPaintForm.ApplyStampingEffect();
+                            childPaintForm.ApplyJitterEffect();
+                            break;
+                        }
+
+                    case true when sender.ToString() == WaweToolStripMenuItem.Text:
+                        {
+                            childPaintForm.ApplyWaterWaveEffect();
+                            break;
+                        }
+
+                    case true when sender.ToString() == PixellateToolStripMenuItem.Text:
+                        {
+                            childPaintForm.ApplyConvolutionEffect();
                             break;
                         }
                 }

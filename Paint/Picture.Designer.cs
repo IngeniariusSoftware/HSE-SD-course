@@ -56,7 +56,7 @@
             this.Controls.Add(this.pictureBox);
             this.DoubleBuffered = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MinimumSize = new System.Drawing.Size(0, 40);
+            this.MinimumSize = new System.Drawing.Size(16, 40);
             this.Name = "Picture";
             this.Text = "Picture";
             this.SizeChanged += new System.EventHandler(this.Picture_SizeChanged);
