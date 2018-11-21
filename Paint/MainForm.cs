@@ -151,12 +151,6 @@
                             break;
                         }
 
-                    case true when sender.ToString() == GreenNegativeToolStripMenuItem.Text:
-                        {
-                            childPaintForm.ApplyGreenNegativeEffect();
-                            break;
-                        }
-
                     case true when sender.ToString() == StampingToolStripMenuItem.Text:
                         {
                             childPaintForm.ApplyStampingEffect();

@@ -69,7 +69,6 @@
             this.BlurEffectMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.SharpnessEffectMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.SepiaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.GreenNegativeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.StampingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.NegativeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.WindowMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -457,7 +456,6 @@
             this.BlurEffectMenuItem,
             this.SharpnessEffectMenuItem,
             this.SepiaToolStripMenuItem,
-            this.GreenNegativeToolStripMenuItem,
             this.StampingToolStripMenuItem,
             this.NegativeToolStripMenuItem});
             this.EffectsMenuItem.Font = new System.Drawing.Font("Segoe UI", 9F);
@@ -468,42 +466,35 @@
             // BlurEffectMenuItem
             // 
             this.BlurEffectMenuItem.Name = "BlurEffectMenuItem";
-            this.BlurEffectMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.BlurEffectMenuItem.Size = new System.Drawing.Size(180, 22);
             this.BlurEffectMenuItem.Text = "Размытие";
             this.BlurEffectMenuItem.Click += new System.EventHandler(this.EffectMenuItem_Click);
             // 
             // SharpnessEffectMenuItem
             // 
             this.SharpnessEffectMenuItem.Name = "SharpnessEffectMenuItem";
-            this.SharpnessEffectMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.SharpnessEffectMenuItem.Size = new System.Drawing.Size(180, 22);
             this.SharpnessEffectMenuItem.Text = "Резкость";
             this.SharpnessEffectMenuItem.Click += new System.EventHandler(this.EffectMenuItem_Click);
             // 
             // SepiaToolStripMenuItem
             // 
             this.SepiaToolStripMenuItem.Name = "SepiaToolStripMenuItem";
-            this.SepiaToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.SepiaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.SepiaToolStripMenuItem.Text = "Сепия";
             this.SepiaToolStripMenuItem.Click += new System.EventHandler(this.EffectMenuItem_Click);
-            // 
-            // GreenNegativeToolStripMenuItem
-            // 
-            this.GreenNegativeToolStripMenuItem.Name = "GreenNegativeToolStripMenuItem";
-            this.GreenNegativeToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
-            this.GreenNegativeToolStripMenuItem.Text = "Зеленый негатив";
-            this.GreenNegativeToolStripMenuItem.Click += new System.EventHandler(this.EffectMenuItem_Click);
             // 
             // StampingToolStripMenuItem
             // 
             this.StampingToolStripMenuItem.Name = "StampingToolStripMenuItem";
-            this.StampingToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.StampingToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.StampingToolStripMenuItem.Text = "Тиснение";
             this.StampingToolStripMenuItem.Click += new System.EventHandler(this.EffectMenuItem_Click);
             // 
             // NegativeToolStripMenuItem
             // 
             this.NegativeToolStripMenuItem.Name = "NegativeToolStripMenuItem";
-            this.NegativeToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.NegativeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.NegativeToolStripMenuItem.Text = "Негатив";
             this.NegativeToolStripMenuItem.Click += new System.EventHandler(this.EffectMenuItem_Click);
             // 
@@ -617,7 +608,6 @@
         private System.Windows.Forms.ToolStripMenuItem BlurEffectMenuItem;
         private System.Windows.Forms.ToolStripMenuItem SharpnessEffectMenuItem;
         private System.Windows.Forms.ToolStripMenuItem SepiaToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem GreenNegativeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem StampingToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem NegativeToolStripMenuItem;
     }

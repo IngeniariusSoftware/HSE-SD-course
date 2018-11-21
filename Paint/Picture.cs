@@ -1,6 +1,5 @@
 ﻿namespace Paint
 {
-    using System;
     using System.Drawing;
     using System.Windows.Forms;
 
@@ -51,11 +50,6 @@
         public void ApplyNegativeEffect()
         {
             EffectsSystem.NegativeEffect.ApplyInPlace((Bitmap)pictureBox.BackgroundImage);
-        }
-
-        public void ApplyGreenNegativeEffect()
-        {
-            EffectsSystem.GreenNegativeEffect.ApplyInPlace((Bitmap)pictureBox.BackgroundImage);
         }
 
         public void ApplyStampingEffect()
