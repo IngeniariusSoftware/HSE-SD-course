@@ -59,7 +59,7 @@
             this.MinimumSize = new System.Drawing.Size(16, 40);
             this.Name = "Picture";
             this.Text = "Picture";
-            this.SizeChanged += new System.EventHandler(this.Picture_SizeChanged);
+            this.ResizeEnd += new System.EventHandler(this.Picture_ResizeEnd);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             this.ResumeLayout(false);
 

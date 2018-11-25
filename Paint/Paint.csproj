@@ -73,6 +73,7 @@
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="OpenFileSystem.cs" />
+    <Compile Include="Tools\Loupe.cs" />
     <Compile Include="Tools\Pencil.cs" />
     <Compile Include="Picture.cs">
       <SubType>Form</SubType>
