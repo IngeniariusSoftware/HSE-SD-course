@@ -13,9 +13,12 @@
 
         private void PictureBox_MouseUp(object sender, MouseEventArgs e)
         {
-            DrawingSystem.EndDrawing(pictureBox.BackgroundImage);
-            pictureBox.Image = null;
-            pictureBox.Refresh();
+            if (DrawingSystem.IsDrawing)
+            {
+                DrawingSystem.EndDrawing(pictureBox.BackgroundImage);
+                pictureBox.Image = null;
+                pictureBox.Refresh();
+            }
         }
 
         private void PictureBox_MouseMove(object sender, MouseEventArgs e)
@@ -66,11 +69,6 @@
             EffectsSystem.JitterEffect.ApplyInPlace((Bitmap)pictureBox.BackgroundImage);
         }
 
-        public void ApplyAdditiveNoiseEffect()
-        {
-            EffectsSystem.AdditiveNoiseEffect.ApplyInPlace((Bitmap)pictureBox.BackgroundImage);
-        }
-
         public void ApplyConvolutionEffect()
         {
             EffectsSystem.ConvolutionEffect.ApplyInPlace((Bitmap)pictureBox.BackgroundImage);
@@ -104,7 +102,7 @@
             }
         }
 
-        private void Picture_SizeChanged(object sender, System.EventArgs e)
+        private void Picture_ResizeEnd(object sender, System.EventArgs e)
         {
             DrawingSystem.Buffer?.Dispose();
             DrawingSystem.Buffer = (Bitmap)pictureBox.BackgroundImage.Clone();
