@@ -14,6 +14,8 @@
 
         private static Eraser _eraser = new Eraser();
 
+        private static Loupe _loupe = new Loupe();
+
         private static Line _line = new Line();
 
         private static Pencil _pencil = new Pencil();
@@ -56,6 +58,20 @@
                         _tool = _line;
                         break;
                     }
+
+                case "LoupePlus":
+                    {
+                        _tool = _loupe;
+                        _loupe.isIncrease = true;
+                        break;
+                    }
+
+                case "LoupeMinus":
+                    {
+                        _tool = _loupe;
+                        _loupe.isIncrease = false;
+                        break;
+                    }
             }
 
             return _tool;
@@ -92,21 +108,48 @@
 
         public static void StartDrawing(Point cursor, PictureBox pictureBox)
         {
-            Buffer = new Bitmap(pictureBox.Size.Width, pictureBox.Size.Height);
-            if (_tool is Eraser)
+            if (_tool is Loupe)
             {
-                ((Eraser)_tool).StartDrawing(pictureBox.BackgroundImage, _pen, cursor);
+                _graphics?.Dispose();
+                _graphics = Graphics.FromImage(pictureBox.BackgroundImage);
+                if (_loupe.isIncrease)
+                {
+
+                    _graphics.ScaleTransform(2, 2);
+
+                }
+                else
+                {
+                    _graphics.ScaleTransform(0.5f, 0.5f);
+                }
+
+                Buffer?.Dispose();
+                Buffer = (Bitmap)pictureBox.BackgroundImage.Clone();
+                _graphics.Clear(Color.Empty);
+                _graphics.DrawImage(Buffer, 0, 0);
+                Buffer.Dispose();
+                _graphics.Dispose();
+                pictureBox.Refresh();
             }
             else
             {
-                pictureBox.Image = Buffer;
-                _graphics = Graphics.FromImage(Buffer);
-                _graphics.CompositingQuality = CompositingQuality.HighQuality;
-                _graphics.SmoothingMode = SmoothingMode.HighQuality;
-                _tool.StartDrawing(_graphics, _pen, cursor);
-            }
+                Buffer = new Bitmap(pictureBox.Size.Width, pictureBox.Size.Height);
+                if (_tool is Eraser)
+                {
+                    ((Eraser)_tool).StartDrawing(pictureBox.BackgroundImage, _pen, cursor);
+                }
+                else
+                {
+                    pictureBox.Image = Buffer;
+                    _graphics = Graphics.FromImage(Buffer);
+                    _graphics.CompositingQuality = CompositingQuality.HighQuality;
+                    _graphics.SmoothingMode = SmoothingMode.HighQuality;
+                    _tool.StartDrawing(_graphics, _pen, cursor);
+                }
 
-            IsDrawing = true;
+                IsDrawing = true;
+            }
+            
         }
 
         public static void Drawing(Point currentPosition)
