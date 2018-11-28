@@ -1,5 +1,6 @@
 ﻿namespace Paint
 {
+    using System;
     using System.Drawing;
     using System.Windows.Forms;
 
@@ -89,6 +90,7 @@
             if (pictureBox.BackgroundImage != null)
             {
                 pictureBox.BackgroundImage.RotateFlip(RotateFlipType.Rotate90FlipNone);
+                pictureBox.Size = new Size(pictureBox.Size.Height, pictureBox.Size.Width);
                 Size = new Size(Size.Height, Size.Width);
             }
         }
@@ -98,6 +100,7 @@
             if (pictureBox.BackgroundImage != null)
             {
                 pictureBox.BackgroundImage.RotateFlip(RotateFlipType.Rotate270FlipNone);
+                pictureBox.Size = new Size(pictureBox.Size.Height, pictureBox.Size.Width);
                 Size = new Size(Size.Height, Size.Width);
             }
         }
@@ -109,6 +112,71 @@
             pictureBox.BackgroundImage.Dispose();
             pictureBox.BackgroundImage = new Bitmap(pictureBox.Width, pictureBox.Height);
             DrawingSystem.EndDrawing(pictureBox.BackgroundImage);
+        }
+
+        private void Picture_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (ResizingCursor.isResizeMode)
+            {
+                Cursor.Position = new Point(
+                    Math.Max(
+                        pictureBox.MinimumSize.Width + pictureBox.Location.X + ParentForm.Location.X + Location.X,
+                        Math.Min(Cursor.Position.X, ParentForm.Location.X + Location.X + Size.Width)),
+                    Math.Max(
+                        pictureBox.MinimumSize.Height + pictureBox.Location.Y + Location.Y + ParentForm.Location.Y
+                        + ((MainForm)ParentForm).PaintPanel.Location.Y + 50
+                        + ((MainForm)ParentForm).PaintPanel.Size.Height,
+                        Math.Min(
+                            Cursor.Position.Y,
+                            ParentForm.Location.Y + Location.Y + Size.Height
+                            + ((MainForm)ParentForm).PaintPanel.Location.Y + 50
+                            + ((MainForm)ParentForm).PaintPanel.Size.Height)));
+                switch (true)
+                {
+                    case true when Cursor.Current == Cursors.SizeWE:
+                        {
+                            pictureBox.Size = new Size(
+                                Math.Max(pictureBox.MinimumSize.Width, e.X - pictureBox.Location.X),
+                                pictureBox.Size.Height);
+                            break;
+                        }
+                    case true when Cursor.Current == Cursors.SizeNS:
+                        {
+                            pictureBox.Size = new Size(
+                                pictureBox.Size.Width,
+                                Math.Max(pictureBox.MinimumSize.Height, e.Y - pictureBox.Location.Y));
+                            break;
+                        }
+                    case true when Cursor.Current == Cursors.SizeNWSE:
+                        {
+                            pictureBox.Size = new Size(
+                                Math.Max(pictureBox.MinimumSize.Width, e.X - pictureBox.Location.X),
+                                Math.Max(pictureBox.MinimumSize.Height, e.Y - pictureBox.Location.Y));
+                            break;
+                        }
+                }
+            }
+            else
+            {
+                ResizingCursor.CheckCursor(pictureBox.Location, pictureBox.Size, e.Location);
+            }
+        }
+
+        private void Picture_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (ResizingCursor.CheckCursor(pictureBox.Location, pictureBox.Size, e.Location))
+            {
+                ResizingCursor.isResizeMode = true;
+            }
+        }
+
+        private void Picture_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (ResizingCursor.isResizeMode)
+            {
+                ResizingCursor.isResizeMode = false;
+                Picture_ResizeEnd(null, EventArgs.Empty);
+            }
         }
     }
 }
