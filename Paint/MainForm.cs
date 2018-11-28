@@ -32,19 +32,36 @@
 
         private void NewFileMenuItem_Click(object sender, EventArgs e)
         {
-            PaintMenuStrip.Items.Add(_fileNameSystem.NewFile());
-            PaintMenuStrip.Items[PaintMenuStrip.Items.Count - 1].Name = _fileNameSystem.CurrentFile;
-            PaintMenuStrip.Items[PaintMenuStrip.Items.Count - 1].Click += FileMenuItem_Click;
-            HighlightMenuItem(_fileNameSystem.LastFile, _fileNameSystem.CurrentFile);
-            Picture picture = new Picture();
-            picture.Text = _fileNameSystem.CurrentFile;
-            picture.GotFocus += ChangePicture;
-            picture.Closing += RemoveMenuItem;
-            picture.MdiParent = this;
-            picture.Show();
-            if (picture.WindowState == FormWindowState.Maximized)
+            (string, Image) result = (string.Empty, null);
+            if (sender.ToString() == OpenFileMenuItem.Text)
             {
-                PaintMenuStrip.Items[0].Image = Properties.Resources.CanvasIcon;
+                result = OpenFileSystem.OpenImage();
+                if (result.Item2 != null)
+                {
+                    PaintMenuStrip.Items.Add(_fileNameSystem.NewFile(result.Item1));
+                }
+            }
+            else
+            {
+                PaintMenuStrip.Items.Add(_fileNameSystem.NewFile());
+            }
+
+            if (sender.ToString() != OpenFileMenuItem.Text
+                || (sender.ToString() == OpenFileMenuItem.Text && result.Item2 != null))
+            {
+                PaintMenuStrip.Items[PaintMenuStrip.Items.Count - 1].Name = _fileNameSystem.CurrentFile;
+                PaintMenuStrip.Items[PaintMenuStrip.Items.Count - 1].Click += FileMenuItem_Click;
+                HighlightMenuItem(_fileNameSystem.LastFile, _fileNameSystem.CurrentFile);
+                Picture picture = new Picture(result.Item2);
+                picture.Text = _fileNameSystem.CurrentFile;
+                picture.GotFocus += ChangePicture;
+                picture.Closing += RemoveMenuItem;
+                picture.MdiParent = this;
+                picture.Show();
+                if (picture.WindowState == FormWindowState.Maximized)
+                {
+                    PaintMenuStrip.Items[0].Image = Properties.Resources.CanvasIcon;
+                }
             }
         }
 
