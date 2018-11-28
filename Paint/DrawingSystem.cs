@@ -110,22 +110,30 @@
         {
             if (_tool is Loupe)
             {
-                _graphics?.Dispose();
-                _graphics = Graphics.FromImage(pictureBox.BackgroundImage);
                 if (_loupe.isIncrease)
                 {
-
-                    _graphics.ScaleTransform(2, 2);
-
+                    pictureBox.Size = new Size((int)(pictureBox.Size.Width * 1.2), (int)(pictureBox.Size.Height * 1.2));
                 }
                 else
                 {
-                    _graphics.ScaleTransform(0.5f, 0.5f);
+                    pictureBox.Size = new Size((int)(pictureBox.Size.Width * 0.8), (int)(pictureBox.Size.Height * 0.8));
                 }
 
                 Buffer?.Dispose();
                 Buffer = (Bitmap)pictureBox.BackgroundImage.Clone();
-                _graphics.Clear(Color.Empty);
+                pictureBox.BackgroundImage?.Dispose();
+                pictureBox.BackgroundImage = new Bitmap(pictureBox.Size.Width, pictureBox.Size.Height);
+                _graphics?.Dispose();
+                _graphics = Graphics.FromImage(pictureBox.BackgroundImage);
+                if (_loupe.isIncrease)
+                {
+                    _graphics.ScaleTransform(1.2f, 1.2f);
+                }
+                else
+                {
+                    _graphics.ScaleTransform(0.8f, 0.8f);
+                }
+
                 _graphics.DrawImage(Buffer, 0, 0);
                 Buffer.Dispose();
                 _graphics.Dispose();
