@@ -8,7 +8,8 @@
         public static (string, Image) OpenImage()
         {
             OpenFileDialog dialog = new OpenFileDialog();
-            dialog.Filter = "Images|*.GIF;*.TIF;*.JPG;*.BPM";
+            dialog.Title = "Открытие изображения";
+            dialog.Filter = "Изображение|*.png;*.gif;*.tif;*.jpg;*.bpm";
             dialog.ShowDialog();
             if (dialog.FileName == "")
             {
