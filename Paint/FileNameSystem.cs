@@ -8,10 +8,9 @@
 
         private List<string> _files = new List<string>();
 
-        public string NewFile()
+        public string NewFile(string newFile = "Безымянный.png")
         {
             LastFile = CurrentFile;
-            string newFile = "Безымянный.png";
             int number = 1;
             while (_files.Contains(newFile))
             {
@@ -36,13 +35,6 @@
             {
                 CurrentFile = string.Empty;
             }
-        }
-
-        public void AddFile(string fileName)
-        {
-            LastFile = CurrentFile;
-            _files.Add(fileName);
-            CurrentFile = fileName;
         }
 
         public void ChangeFile(string fileName)
