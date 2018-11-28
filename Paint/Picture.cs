@@ -6,10 +6,18 @@
 
     public partial class Picture : Form
     {
-        public Picture()
+        public Picture(Image image)
         {
             InitializeComponent();
-            pictureBox.BackgroundImage = new Bitmap(pictureBox.Width, pictureBox.Height);
+            if (image != null)
+            {
+                pictureBox.Size = image.Size;
+                pictureBox.BackgroundImage = image;
+            }
+            else
+            {
+                pictureBox.BackgroundImage = new Bitmap(pictureBox.Width, pictureBox.Height);
+            }
         }
 
         private void PictureBox_MouseUp(object sender, MouseEventArgs e)
@@ -121,7 +129,7 @@
                 Cursor.Position = new Point(
                     Math.Max(
                         pictureBox.MinimumSize.Width + pictureBox.Location.X + ParentForm.Location.X + Location.X,
-                        Math.Min(Cursor.Position.X, ParentForm.Location.X + Location.X + Size.Width)),
+                        Math.Min(Cursor.Position.X, ParentForm.Location.X + Location.X + Size.Width - 6)),
                     Math.Max(
                         pictureBox.MinimumSize.Height + pictureBox.Location.Y + Location.Y + ParentForm.Location.Y
                         + ((MainForm)ParentForm).PaintPanel.Location.Y + 50
