@@ -1,53 +1,65 @@
 ﻿namespace Paint
 {
     using System;
-    using System.Collections.Generic;
     using System.Drawing;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
     using System.Windows.Forms;
 
     public static class ResizingCursor
     {
-        public static void CheckCursor(Cursor cursor, Point locationElement, Size sizeElement, Point cursorLocalPosition)
+        private static double _deltaDistance = 10;
+
+        public static bool isResizeMode = false;
+
+        public static bool CheckCursor(Point locationElement, Size sizeElement, Point cursorLocalPosition)
         {
-            double deltaDistance = 5;
-            if (Math.Abs(cursorLocalPosition.X - sizeElement.Width - locationElement.X) < deltaDistance)
+            Console.WriteLine(
+                $"locationElement: {locationElement} sizeElement {sizeElement} cursor: {cursorLocalPosition}");
+            if (Math.Abs(cursorLocalPosition.X - sizeElement.Width - locationElement.X) < _deltaDistance)
             {
-                if (Math.Abs(cursorLocalPosition.Y - sizeElement.Height - locationElement.Y) < deltaDistance)
+                if (Math.Abs(cursorLocalPosition.Y - sizeElement.Height - locationElement.Y) < _deltaDistance)
                 {
-                    cursor = Cursors.SizeNWSE;
+                    Cursor.Current = Cursors.SizeNWSE;
                 }
                 else
                 {
-                    if (Math.Abs(cursorLocalPosition.Y - locationElement.Y) < deltaDistance)
+                    if (locationElement.Y < cursorLocalPosition.Y
+                        && cursorLocalPosition.Y < sizeElement.Height + locationElement.Y)
                     {
-                        cursor = Cursors.SizeWE;
+                        Cursor.Current = Cursors.SizeWE;
                     }
                     else
                     {
-                        cursor = Cursors.Arrow;
+                        Cursor.Current = Cursors.Arrow;
                     }
                 }
             }
             else
             {
-                if (Math.Abs(cursorLocalPosition.Y - sizeElement.Height - locationElement.Y) < deltaDistance)
+                if (Math.Abs(cursorLocalPosition.Y - sizeElement.Height - locationElement.Y) < _deltaDistance)
                 {
-                    cursor = Cursors.SizeNWSE;
-                }
-                else
-                {
-                    if (Math.Abs(cursorLocalPosition.Y - locationElement.Y) < deltaDistance)
+                    if (locationElement.X < cursorLocalPosition.X
+                        && cursorLocalPosition.X < sizeElement.Width + locationElement.X)
                     {
-                        cursor = Cursors.SizeWE;
+                        Cursor.Current = Cursors.SizeNS;
                     }
                     else
                     {
-                        cursor = Cursors.Arrow;
+                        Cursor.Current = Cursors.Arrow;
                     }
                 }
+                else
+                {
+                    Cursor.Current = Cursors.Arrow;
+                }
+            }
+
+            if (Cursor.Current == Cursors.Arrow)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
             }
         }
     }
