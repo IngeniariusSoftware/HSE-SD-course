@@ -5,19 +5,19 @@
 
     public static class OpenFileSystem
     {
-        public static (string, Image) OpenImage()
+        public static (string, string, Image) OpenImage()
         {
             OpenFileDialog dialog = new OpenFileDialog();
             dialog.Title = "Открытие изображения";
-            dialog.Filter = "Изображение|*.png;*.gif;*.tif;*.jpg;*.bpm";
+            dialog.Filter = "Bitmap (*.bmp)|*.bmp|JPEG (*.jpeg)|*.jpeg|PNG (*.png)|*.png";
             dialog.ShowDialog();
             if (dialog.FileName == "")
             {
-                return (string.Empty, null);
+                return (string.Empty, string.Empty, null);
             }
             else
             {
-                return (dialog.SafeFileName, Image.FromFile(dialog.FileName));
+                return (dialog.FileName, dialog.SafeFileName, Image.FromFile(dialog.FileName));
             }
         }
     }

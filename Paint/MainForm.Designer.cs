@@ -30,9 +30,6 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.PaintPanel = new System.Windows.Forms.Panel();
-            this.UndoButton = new System.Windows.Forms.Button();
-            this.UndoLabel = new System.Windows.Forms.Label();
-            this.SplitterUndo = new System.Windows.Forms.Splitter();
             this.ClockwiseRotateButton = new System.Windows.Forms.Button();
             this.VerticalFlipButton = new System.Windows.Forms.Button();
             this.HorizontalFlipButton = new System.Windows.Forms.Button();
@@ -88,10 +85,7 @@
             // PaintPanel
             // 
             this.PaintPanel.BackColor = System.Drawing.SystemColors.Control;
-            this.PaintPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.PaintPanel.Controls.Add(this.UndoButton);
-            this.PaintPanel.Controls.Add(this.UndoLabel);
-            this.PaintPanel.Controls.Add(this.SplitterUndo);
+            this.PaintPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.PaintPanel.Controls.Add(this.ClockwiseRotateButton);
             this.PaintPanel.Controls.Add(this.VerticalFlipButton);
             this.PaintPanel.Controls.Add(this.HorizontalFlipButton);
@@ -121,34 +115,6 @@
             this.PaintPanel.Name = "PaintPanel";
             this.PaintPanel.Size = new System.Drawing.Size(1359, 91);
             this.PaintPanel.TabIndex = 4;
-            // 
-            // UndoButton
-            // 
-            this.UndoButton.Image = global::Paint.Properties.Resources.UndoIcon;
-            this.UndoButton.Location = new System.Drawing.Point(1110, 10);
-            this.UndoButton.Name = "UndoButton";
-            this.UndoButton.Size = new System.Drawing.Size(40, 40);
-            this.UndoButton.TabIndex = 29;
-            this.UndoButton.UseVisualStyleBackColor = true;
-            // 
-            // UndoLabel
-            // 
-            this.UndoLabel.AutoSize = true;
-            this.UndoLabel.Location = new System.Drawing.Point(1106, 64);
-            this.UndoLabel.Name = "UndoLabel";
-            this.UndoLabel.Size = new System.Drawing.Size(57, 13);
-            this.UndoLabel.TabIndex = 28;
-            this.UndoLabel.Text = "Отменить";
-            // 
-            // SplitterUndo
-            // 
-            this.SplitterUndo.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.SplitterUndo.Enabled = false;
-            this.SplitterUndo.Location = new System.Drawing.Point(1090, 0);
-            this.SplitterUndo.Name = "SplitterUndo";
-            this.SplitterUndo.Size = new System.Drawing.Size(80, 87);
-            this.SplitterUndo.TabIndex = 27;
-            this.SplitterUndo.TabStop = false;
             // 
             // ClockwiseRotateButton
             // 
@@ -201,11 +167,11 @@
             // 
             // SplitterFlip
             // 
-            this.SplitterFlip.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.SplitterFlip.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.SplitterFlip.Enabled = false;
             this.SplitterFlip.Location = new System.Drawing.Point(820, 0);
             this.SplitterFlip.Name = "SplitterFlip";
-            this.SplitterFlip.Size = new System.Drawing.Size(270, 87);
+            this.SplitterFlip.Size = new System.Drawing.Size(270, 89);
             this.SplitterFlip.TabIndex = 20;
             this.SplitterFlip.TabStop = false;
             // 
@@ -250,21 +216,21 @@
             // 
             // SplitterColor
             // 
-            this.SplitterColor.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.SplitterColor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.SplitterColor.Enabled = false;
             this.SplitterColor.Location = new System.Drawing.Point(740, 0);
             this.SplitterColor.Name = "SplitterColor";
-            this.SplitterColor.Size = new System.Drawing.Size(80, 87);
+            this.SplitterColor.Size = new System.Drawing.Size(80, 89);
             this.SplitterColor.TabIndex = 17;
             this.SplitterColor.TabStop = false;
             // 
             // SplitterSize
             // 
-            this.SplitterSize.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.SplitterSize.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.SplitterSize.Enabled = false;
             this.SplitterSize.Location = new System.Drawing.Point(520, 0);
             this.SplitterSize.Name = "SplitterSize";
-            this.SplitterSize.Size = new System.Drawing.Size(220, 87);
+            this.SplitterSize.Size = new System.Drawing.Size(220, 89);
             this.SplitterSize.TabIndex = 16;
             this.SplitterSize.TabStop = false;
             // 
@@ -319,11 +285,11 @@
             // 
             // SplitterFigures
             // 
-            this.SplitterFigures.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.SplitterFigures.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.SplitterFigures.Enabled = false;
             this.SplitterFigures.Location = new System.Drawing.Point(260, 0);
             this.SplitterFigures.Name = "SplitterFigures";
-            this.SplitterFigures.Size = new System.Drawing.Size(260, 87);
+            this.SplitterFigures.Size = new System.Drawing.Size(260, 89);
             this.SplitterFigures.TabIndex = 11;
             this.SplitterFigures.TabStop = false;
             // 
@@ -378,11 +344,11 @@
             // 
             // SplitterTools
             // 
-            this.SplitterTools.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.SplitterTools.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.SplitterTools.Enabled = false;
             this.SplitterTools.Location = new System.Drawing.Point(0, 0);
             this.SplitterTools.Name = "SplitterTools";
-            this.SplitterTools.Size = new System.Drawing.Size(260, 87);
+            this.SplitterTools.Size = new System.Drawing.Size(260, 89);
             this.SplitterTools.TabIndex = 9;
             this.SplitterTools.TabStop = false;
             // 
@@ -404,38 +370,42 @@
             // NewFileMenuItem
             // 
             this.NewFileMenuItem.Name = "NewFileMenuItem";
-            this.NewFileMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.NewFileMenuItem.Size = new System.Drawing.Size(180, 22);
             this.NewFileMenuItem.Text = "Новый";
             this.NewFileMenuItem.Click += new System.EventHandler(this.NewFileMenuItem_Click);
             // 
             // OpenFileMenuItem
             // 
             this.OpenFileMenuItem.Name = "OpenFileMenuItem";
-            this.OpenFileMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.OpenFileMenuItem.Size = new System.Drawing.Size(180, 22);
             this.OpenFileMenuItem.Text = "Открыть…";
+            this.OpenFileMenuItem.Click += new System.EventHandler(this.NewFileMenuItem_Click);
             // 
             // SaveFileAsMenuItem
             // 
             this.SaveFileAsMenuItem.Name = "SaveFileAsMenuItem";
-            this.SaveFileAsMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.SaveFileAsMenuItem.Size = new System.Drawing.Size(180, 22);
             this.SaveFileAsMenuItem.Text = "Сохранить как…";
+            this.SaveFileAsMenuItem.Click += new System.EventHandler(this.SaveFileAs_Click);
             // 
             // SaveFileMenuItem
             // 
             this.SaveFileMenuItem.Name = "SaveFileMenuItem";
-            this.SaveFileMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.SaveFileMenuItem.Size = new System.Drawing.Size(180, 22);
             this.SaveFileMenuItem.Text = "Сохранить";
+            this.SaveFileMenuItem.Click += new System.EventHandler(this.SaveFileMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(159, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
             // 
             // ExitMenuItem
             // 
             this.ExitMenuItem.Name = "ExitMenuItem";
-            this.ExitMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.ExitMenuItem.Size = new System.Drawing.Size(180, 22);
             this.ExitMenuItem.Text = "Выход";
+            this.ExitMenuItem.Click += new System.EventHandler(this.ExitMenuItem_Click);
             // 
             // PaintMenuStrip
             // 
@@ -474,63 +444,63 @@
             // BlurEffectMenuItem
             // 
             this.BlurEffectMenuItem.Name = "BlurEffectMenuItem";
-            this.BlurEffectMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.BlurEffectMenuItem.Size = new System.Drawing.Size(146, 22);
             this.BlurEffectMenuItem.Text = "Размытие";
             this.BlurEffectMenuItem.Click += new System.EventHandler(this.EffectMenuItem_Click);
             // 
             // SharpnessEffectMenuItem
             // 
             this.SharpnessEffectMenuItem.Name = "SharpnessEffectMenuItem";
-            this.SharpnessEffectMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.SharpnessEffectMenuItem.Size = new System.Drawing.Size(146, 22);
             this.SharpnessEffectMenuItem.Text = "Резкость";
             this.SharpnessEffectMenuItem.Click += new System.EventHandler(this.EffectMenuItem_Click);
             // 
             // SepiaToolStripMenuItem
             // 
             this.SepiaToolStripMenuItem.Name = "SepiaToolStripMenuItem";
-            this.SepiaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.SepiaToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.SepiaToolStripMenuItem.Text = "Сепия";
             this.SepiaToolStripMenuItem.Click += new System.EventHandler(this.EffectMenuItem_Click);
             // 
             // StampingToolStripMenuItem
             // 
             this.StampingToolStripMenuItem.Name = "StampingToolStripMenuItem";
-            this.StampingToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.StampingToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.StampingToolStripMenuItem.Text = "Тиснение";
             this.StampingToolStripMenuItem.Click += new System.EventHandler(this.EffectMenuItem_Click);
             // 
             // NegativeToolStripMenuItem
             // 
             this.NegativeToolStripMenuItem.Name = "NegativeToolStripMenuItem";
-            this.NegativeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.NegativeToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.NegativeToolStripMenuItem.Text = "Негатив";
             this.NegativeToolStripMenuItem.Click += new System.EventHandler(this.EffectMenuItem_Click);
             // 
             // WaweToolStripMenuItem
             // 
             this.WaweToolStripMenuItem.Name = "WaweToolStripMenuItem";
-            this.WaweToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.WaweToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.WaweToolStripMenuItem.Text = "Волнистость";
             this.WaweToolStripMenuItem.Click += new System.EventHandler(this.EffectMenuItem_Click);
             // 
             // PixellateToolStripMenuItem
             // 
             this.PixellateToolStripMenuItem.Name = "PixellateToolStripMenuItem";
-            this.PixellateToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.PixellateToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.PixellateToolStripMenuItem.Text = "Рельефность";
             this.PixellateToolStripMenuItem.Click += new System.EventHandler(this.EffectMenuItem_Click);
             // 
             // JitterToolStripMenuItem
             // 
             this.JitterToolStripMenuItem.Name = "JitterToolStripMenuItem";
-            this.JitterToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.JitterToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.JitterToolStripMenuItem.Text = "Акварель";
             this.JitterToolStripMenuItem.Click += new System.EventHandler(this.EffectMenuItem_Click);
             // 
             // NoiseToolStripMenuItem
             // 
             this.NoiseToolStripMenuItem.Name = "NoiseToolStripMenuItem";
-            this.NoiseToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.NoiseToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.NoiseToolStripMenuItem.Text = "Шум";
             this.NoiseToolStripMenuItem.Click += new System.EventHandler(this.EffectMenuItem_Click);
             // 
@@ -599,7 +569,6 @@
         }
 
         #endregion
-        private System.Windows.Forms.Panel PaintPanel;
         private System.Windows.Forms.ToolStripMenuItem FileMenuItem;
         private System.Windows.Forms.ToolStripMenuItem NewFileMenuItem;
         private System.Windows.Forms.ToolStripMenuItem OpenFileMenuItem;
@@ -636,9 +605,6 @@
         private System.Windows.Forms.Button CounterClockwiseRotateButton;
         private System.Windows.Forms.Label RotateLabel;
         private System.Windows.Forms.Splitter SplitterFlip;
-        private System.Windows.Forms.Button UndoButton;
-        private System.Windows.Forms.Label UndoLabel;
-        private System.Windows.Forms.Splitter SplitterUndo;
         private System.Windows.Forms.Button ClockwiseRotateButton;
         private System.Windows.Forms.ToolStripMenuItem EffectsMenuItem;
         private System.Windows.Forms.ToolStripMenuItem BlurEffectMenuItem;
@@ -650,6 +616,7 @@
         private System.Windows.Forms.ToolStripMenuItem PixellateToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem JitterToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem NoiseToolStripMenuItem;
+        public System.Windows.Forms.Panel PaintPanel;
     }
 }
 

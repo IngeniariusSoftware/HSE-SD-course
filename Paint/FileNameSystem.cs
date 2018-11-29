@@ -43,6 +43,15 @@
             CurrentFile = fileName;
         }
 
+        public void RenameFile(string fileName)
+        {
+            if (_files.Count > 0)
+            {
+                _files[_files.Count - 1] = fileName;
+                CurrentFile = fileName;
+            }
+        }
+
         public int GetIndexFile(string fileName)
         {
             if (_files.Contains(fileName))

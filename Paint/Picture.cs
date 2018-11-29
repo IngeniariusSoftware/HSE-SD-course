@@ -2,10 +2,21 @@
 {
     using System;
     using System.Drawing;
+    using System.IO;
     using System.Windows.Forms;
 
     public partial class Picture : Form
     {
+        public string SavePath = string.Empty;
+
+        public bool IsChanged = false;
+
+        public void Save()
+        {
+            pictureBox.BackgroundImage.Save(SavePath.Replace("png", "bmp"));
+            IsChanged = false;
+        }
+
         public Picture(Image image)
         {
             InitializeComponent();
@@ -27,6 +38,7 @@
                 DrawingSystem.EndDrawing(pictureBox.BackgroundImage);
                 pictureBox.Image = null;
                 pictureBox.Refresh();
+                IsChanged = true;
             }
         }
 
@@ -120,6 +132,7 @@
             pictureBox.BackgroundImage.Dispose();
             pictureBox.BackgroundImage = new Bitmap(pictureBox.Width, pictureBox.Height);
             DrawingSystem.EndDrawing(pictureBox.BackgroundImage);
+            IsChanged = true;
         }
 
         private void Picture_MouseMove(object sender, MouseEventArgs e)
@@ -184,6 +197,21 @@
             {
                 ResizingCursor.isResizeMode = false;
                 Picture_ResizeEnd(null, EventArgs.Empty);
+            }
+        }
+
+        private void ChildForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (IsChanged)
+            {
+                var result = MessageBox.Show(
+                    "Сохранить сделанные изменения?",
+                    "Сохранить " + Text + "?",
+                    MessageBoxButtons.YesNo);
+                if (result == DialogResult.Yes)
+                {
+                    ((MainForm)ParentForm).SaveFileMenuItem_Click(null, EventArgs.Empty);
+                }
             }
         }
     }

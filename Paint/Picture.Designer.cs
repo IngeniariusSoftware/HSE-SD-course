@@ -37,10 +37,11 @@
             // 
             this.pictureBox.BackColor = System.Drawing.SystemColors.Control;
             this.pictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.pictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox.MinimumSize = new System.Drawing.Size(5, 5);
             this.pictureBox.Name = "pictureBox";
-            this.pictureBox.Size = new System.Drawing.Size(886, 489);
+            this.pictureBox.Size = new System.Drawing.Size(958, 494);
             this.pictureBox.TabIndex = 0;
             this.pictureBox.TabStop = false;
             this.pictureBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PictureBox_MouseDown);
@@ -51,15 +52,20 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(886, 489);
+            this.AutoScroll = true;
+            this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.ClientSize = new System.Drawing.Size(1265, 607);
             this.Controls.Add(this.pictureBox);
-            this.DoubleBuffered = true;
+            this.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(16, 40);
             this.Name = "Picture";
             this.Text = "Picture";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ChildForm_FormClosing);
             this.ResizeEnd += new System.EventHandler(this.Picture_ResizeEnd);
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Picture_MouseDown);
+            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Picture_MouseMove);
+            this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Picture_MouseUp);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             this.ResumeLayout(false);
 

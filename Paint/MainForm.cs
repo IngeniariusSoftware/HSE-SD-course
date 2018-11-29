@@ -2,6 +2,7 @@
 {
     using System;
     using System.Drawing;
+    using System.IO;
     using System.Windows.Forms;
 
     public partial class MainForm : Form
@@ -32,13 +33,13 @@
 
         private void NewFileMenuItem_Click(object sender, EventArgs e)
         {
-            (string, Image) result = (string.Empty, null);
+            (string, string, Image) result = (string.Empty, string.Empty, null);
             if (sender.ToString() == OpenFileMenuItem.Text)
             {
                 result = OpenFileSystem.OpenImage();
-                if (result.Item2 != null)
+                if (result.Item3 != null)
                 {
-                    PaintMenuStrip.Items.Add(_fileNameSystem.NewFile(result.Item1));
+                    PaintMenuStrip.Items.Add(_fileNameSystem.NewFile(result.Item2));
                 }
             }
             else
@@ -47,16 +48,17 @@
             }
 
             if (sender.ToString() != OpenFileMenuItem.Text
-                || (sender.ToString() == OpenFileMenuItem.Text && result.Item2 != null))
+                || (sender.ToString() == OpenFileMenuItem.Text && result.Item3 != null))
             {
                 PaintMenuStrip.Items[PaintMenuStrip.Items.Count - 1].Name = _fileNameSystem.CurrentFile;
                 PaintMenuStrip.Items[PaintMenuStrip.Items.Count - 1].Click += FileMenuItem_Click;
                 HighlightMenuItem(_fileNameSystem.LastFile, _fileNameSystem.CurrentFile);
-                Picture picture = new Picture(result.Item2);
+                Picture picture = new Picture(result.Item3);
                 picture.Text = _fileNameSystem.CurrentFile;
                 picture.GotFocus += ChangePicture;
                 picture.Closing += RemoveMenuItem;
                 picture.MdiParent = this;
+                picture.SavePath = result.Item1;
                 picture.Show();
                 if (picture.WindowState == FormWindowState.Maximized)
                 {
@@ -187,6 +189,7 @@
                         }
                 }
 
+                childPaintForm.IsChanged = true;
                 childPaintForm.Refresh();
             }
         }
@@ -224,6 +227,69 @@
                 }
 
                 childPaintForm.Refresh();
+            }
+        }
+
+        private void ExitMenuItem_Click(object sender, EventArgs e)
+        {
+            foreach (Form mdiChild in MdiChildren)
+            {
+                mdiChild.Close();
+            }
+
+            Close();
+        }
+
+        public void SaveFileAs_Click(object sender, EventArgs e)
+        {
+            var picture = ActiveMdiChild as Picture;
+            if (picture != null)
+            {
+                var dialog = new SaveFileDialog
+                                 {
+                                     Title = "Сохранение изображения",
+                                     Filter =
+                                         "Bitmap (*.bmp)|*.bmp|JP2EG (*.jpeg)|*.jpeg|PNG (*.png)|*.png",
+                                     CheckPathExists = true
+                                 };
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    picture.SavePath = Path.GetFullPath(dialog.FileName);
+                    picture.Text = dialog.FileName.Substring(dialog.FileName.LastIndexOf("\\") + 2);
+                    _fileNameSystem.RenameFile(picture.Text);
+                    picture.Save();
+                }
+            }
+        }
+
+        public void SaveFileMenuItem_Click(object sender, EventArgs e)
+        {
+            var picture = ActiveMdiChild as Picture;
+            if (picture != null)
+            {
+                if (picture.SavePath == string.Empty)
+                {
+                    var dialog = new SaveFileDialog
+                                     {
+                                         Title = "Сохранение изображения",
+                                         Filter =
+                                             "Bitmap (*.bmp)|*.bmp|JP2EG (*.jpeg)|*.jpeg|PNG (*.png)|*.png",
+                                         CheckPathExists = true
+                                     };
+                    if (dialog.ShowDialog() == DialogResult.OK)
+                    {
+                        picture.SavePath = Path.GetFullPath(dialog.FileName);
+                        picture.Text = dialog.FileName.Substring(dialog.FileName.LastIndexOf("\\") + 2);
+                        _fileNameSystem.RenameFile(picture.Text);
+                        PaintMenuStrip.Items[PaintMenuStrip.Items.Count - 1].Text = picture.Text;
+                        PaintMenuStrip.Items[PaintMenuStrip.Items.Count - 1].Name = picture.Text;
+                        picture.Save();
+                    }
+                }
+                else
+                {
+                    picture.Save();
+                }
             }
         }
     }
