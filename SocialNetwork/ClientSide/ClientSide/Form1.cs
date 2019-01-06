@@ -26,13 +26,11 @@ namespace ClientSide
         {
             var socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             socket.Connect("127.0.0.1", 904);
-            string message = new string('a', 1024000);
-            var buffer = Encoding.ASCII.GetBytes(message);
+            string message = richTextBox1.Text;
+            var buffer = Encoding.Unicode.GetBytes(message);
             socket.Send(buffer);
-
             socket.Shutdown(SocketShutdown.Both);
             socket.Close();
-
         }
     }
 }
