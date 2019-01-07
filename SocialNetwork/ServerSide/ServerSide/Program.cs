@@ -16,12 +16,18 @@
 
         static void Main()
         {
+            var log = new Log();
+            log.StartLogging();
+            var crypter = new Crypter("Server", log);
+            var messageHandler = new MessageHandler(crypter);
             Console.Title = "Сервер";
-            Server server = new Server(IPAddress.Any, 904, 10500000, 10000);
+            Server server = new Server(IPAddress.Any, 904, 10500000, 10000, log, messageHandler);
             server.Start();
-            Console.WriteLine("Серверный процесс запущен\n");
+            log.MakeLog("Серверный процесс запущен");
             server.Manage();
-            while (server.IsWorked || server.log.IsWorked) ;
+            while (log.isWorked) ;
+            crypter.Close();
+            log.EndLogging(); 
             Console.WriteLine("\nДля завершения работы нажмите любую клавишу");
             Console.ReadKey(true);
         }
