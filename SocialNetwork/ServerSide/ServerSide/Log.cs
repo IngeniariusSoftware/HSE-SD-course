@@ -19,9 +19,7 @@ namespace ServerSide
 
         private StringBuilder info;
 
-        private bool isWorked;
-
-        public bool IsWorked => isWorked;
+        public bool isWorked;
 
         public Log()
         {
@@ -48,14 +46,13 @@ namespace ServerSide
             logCount = 1;
             info = new StringBuilder(1024);
             logWriter = new StreamWriter(logPath);
-            logWriter.WriteLine($"Логирование запущено\nДата запуска: {DateTime.Now}");
+            MakeLog("Логирование запущено");
             isWorked = true;
         }
-        
+
         public void EndLogging()
         {
-            Console.WriteLine($"Сервер выключен\nЛогирование завершено\nДата завершения: {DateTime.Now}");
-            logWriter.WriteLine($"Сервер выключен\nЛогирование завершено\nДата завершения: {DateTime.Now}");
+            MakeLog("Сервер выключен\nЛогирование завершено");
             logWriter.Close();
             isWorked = false;
         }
@@ -63,6 +60,7 @@ namespace ServerSide
         public void MakeLog(string message)
         {
             info.Append($"\nНомер лога #{logCount++}\n");
+            info.Append($"Дата лога: {DateTime.Now}\n");
             info.Append(message);
             logWriter.WriteLine(info);
             Console.WriteLine(info);
@@ -71,36 +69,30 @@ namespace ServerSide
 
         public void MakeLogServerInfo(Socket socket, bool isWorked, int bufferLength, int maxCountConnections)
         {
-            info.Append($"\nНомер лога #{logCount++}\n");
+            StringBuilder message = new StringBuilder(1024);
             if (socket != null)
             {
-                info.Append(isWorked ? "Состояние: включен\nОжидание подключений\n" : "Сервер создан\nСостояние: выключен\n");
-                info.Append($"Сокет: {socket.LocalEndPoint}\n");
-                info.Append($"Время: {DateTime.Now}\n");
-                info.Append($"Размер буфера данных: {bufferLength / 1024.0} кб.\n");
-                info.Append($"Размер стека для обработки запросов: {maxCountConnections}\n");
+                message.Append(
+                    isWorked ? "Состояние: включен\nОжидание подключений\n" : "Сервер создан\nСостояние: выключен\n");
+                message.Append($"Сокет: {socket.LocalEndPoint}\n");
+                message.Append($"Размер буфера данных: {bufferLength / 1024.0} кб.\n");
+                message.Append($"Размер стека для обработки запросов: {maxCountConnections}");
             }
             else
             {
-                info.Append("\tСервер не создан\n");
-                info.Append($"Время: {DateTime.Now}");
+                message.Append("Сервер не создан");
             }
 
-            logWriter.WriteLine(info);
-            Console.WriteLine(info);
-            info.Clear();
+            MakeLog(message.ToString());
         }
 
-        public void MakeLogOperationInfo(Socket socket, double messageSize,double operationTime)
+        public void MakeLogOperationInfo(Socket socket, double messageSize, double operationTime)
         {
-            info.Append($"Номер лога #{logCount++}\n");
-            info.Append($"Дата сообщения: {DateTime.Now}\n");
-            info.Append($"Отправитель: {socket.LocalEndPoint}\n");
-            info.Append($"Вес сообщения: {messageSize} кб.\n");
-            info.Append($"Время обработки: {operationTime} сек.\n");
-            logWriter.WriteLine(info);
-            Console.WriteLine(info);
-            info.Clear();
+            StringBuilder message = new StringBuilder(1024);
+            message.Append($"Сокет: {socket.LocalEndPoint}\n");
+            message.Append($"Вес сообщения: {messageSize} кб.\n");
+            message.Append($"Время обработки: {operationTime} сек.\n");
+            MakeLog(message.ToString());
         }
     }
 }
