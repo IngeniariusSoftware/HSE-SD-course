@@ -16,13 +16,16 @@
                 {
                     { "help", "Показывает список доступных команд" },
                     { "close", "Завершает работу сервера" },
-                    { "info", "Выводит информацию о сервере" }
+                    { "info", "Выводит информацию о сервере" },
+                    { "block xxx.xxx.xxx.xxx", "Блокирует подключения от ip клиента" },
+                    { "unlock xxx.xxx.xxx.xxx", "Снимает блокировку подключений от ip клиента" }
                 };
 
         private Socket socket;
 
         public string GetSocket => socket.ToString();
 
+        private MessageHandler messageHandler;
 
         private byte[] buffer;
 
@@ -35,16 +38,16 @@
         public int maxCountConnections { get; }
 
 
-        public Server(IPAddress ip, int port, int bufferSize, int countConnections)
+        public Server(IPAddress ip, int port, int bufferSize, int countConnections, Log newLog, MessageHandler linkMessageHandler)
         {
             socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             socket.Bind(new IPEndPoint(ip, port));
             buffer = new byte[bufferSize];
             isWorked = false;
             maxCountConnections = countConnections;
-            log = new Log();
-            log.StartLogging();
+            log = newLog;
             log.MakeLogServerInfo(socket, isWorked, buffer.Length, maxCountConnections);
+            messageHandler = linkMessageHandler;
         }
 
         public async void Start()
@@ -66,8 +69,11 @@
                     client = socket.Accept();
                     int messageSize = client.Receive(buffer);
                     timer.Start();
-                    Console.WriteLine(Encoding.Unicode.GetString(buffer, 0, messageSize));
+                    Console.WriteLine(Encoding.UTF8.GetString(buffer, 0, messageSize));
                     log.MakeLogOperationInfo(client, messageSize / 1000.0, timer.ElapsedMilliseconds / 1000.0);
+
+
+
                     timer.Reset();
                     client.Shutdown(SocketShutdown.Both);
                     client.Close();
@@ -85,16 +91,16 @@
                 }
             }
 
-            log.EndLogging();
+            log.isWorked = false;
         }
 
         public void Manage()
         {
-            Console.WriteLine("Командный терминал управления сервером запущен\n");
+            log.MakeLog("Командный терминал управления сервером запущен");
             string command = string.Empty;
             while (command != "close")
             {
-                Console.WriteLine("Введите команду для управления сервером\n");
+                Console.WriteLine("\nВведите команду для управления сервером\n");
                 command = Console.ReadLine();
                 switch (command)
                 {
