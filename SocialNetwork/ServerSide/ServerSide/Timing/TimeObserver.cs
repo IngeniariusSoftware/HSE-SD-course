@@ -2,6 +2,7 @@
 namespace ServerSide.Timing
 {
     using System;
+    using System.Collections.Generic;
     using System.Threading;
 
     using ServerSide.Interfaces;
@@ -9,32 +10,41 @@ namespace ServerSide.Timing
 
     public class TimeObserver : ITimeObserver, IProcess
     {
-        private DateTime _timeFrame;
+        private List<(Timer callBack, DateTime birthDay)> _calls;
+
+        private delegate void method();
 
         private bool _isActive;
 
         private bool _isWorking;
 
-        public TimeObserver()
-        {
-        }
-
         public event TimeEventHandler ChangeState = delegate { };
 
         public bool IsActive => _isActive;
 
+
         public void Start()
         {
             _isActive = true;
-            _timeFrame = DateTime.Today;
             var timeObserverThread = new Thread(Observe) { Name = "Поток работы таймера" };
             ChangeState(this, new TimeEventArgs("Таймер запущен"));
             timeObserverThread.Start();
         }
 
+        public void Add((Timer callBack, DateTime birthDay) birthMethod)
+        {
+            _calls.Add(birthMethod);
+        }
+
+        public void Remove()
+        {
+            _calls.Remove();
+        }
+
         public void End()
         {
             _isActive = false;
+            _calls.Clear();
             while (_isWorking)
             {
                 ChangeState(this, new TimeEventArgs("Ожидание завершения работы таймера..."));

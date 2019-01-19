@@ -5,9 +5,9 @@ namespace ServerSide.Logging
     using System.IO;
     using System.Text;
 
+    using ServerSide.Connecting;
     using ServerSide.Interfaces;
     using ServerSide.Servicing;
-    using ServerSide.Connecting;
     using ServerSide.Timing;
 
     public class Log : ILog, IProcess
@@ -28,8 +28,8 @@ namespace ServerSide.Logging
                 Directory.CreateDirectory(_filePath);
             }
 
-            int logNumber = Directory.GetFiles(_filePath, "*.txt").Length; //+ 1;
-            while (!File.Exists(_filePath + $"{logNumber:D5}" + ".txt"))
+            int logNumber = Directory.GetFiles(_filePath, "*.txt").Length + 1;
+            while (File.Exists(_filePath + $"{logNumber:D5}" + ".txt"))
             {
                 logNumber++;
             }
