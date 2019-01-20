@@ -14,15 +14,4 @@ namespace ServerSide
 
         Female = 1
     }
-
-    public enum OperationAction
-    {
-        Add = 0,
-
-        Remove = 1,
-
-        Change = 2,
-
-        IsBirthday = 3
-    }
 }
