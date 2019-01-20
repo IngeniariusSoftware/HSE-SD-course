@@ -7,11 +7,16 @@ namespace ServerSide.UserManagement
 
     public class PersonEventArgs : EventArgs
     {
-        public PersonEventArgs(string operationInfo)
+        private string _info;
+
+        public PersonEventArgs(string info, DateTime operationTime)
         {
-            OperationInfo = operationInfo;
+            _info = info;
+            OperationTime = operationTime;
         }
 
-        public string OperationInfo { get; }
+        public string Info { get; set; }
+
+        public DateTime OperationTime { get; }
     }
 }

@@ -2,8 +2,10 @@
 namespace ServerSide.UserManagement
 {
     using System;
+    using System.Collections.Generic;
 
     using ServerSide;
+    using ServerSide.UserManagement.Journaling;
 
     public class Person : IPerson
     {
@@ -25,7 +27,13 @@ namespace ServerSide.UserManagement
 
         private int _age;
 
-        public Person(
+        private List<IPerson> _friends = new List<IPerson>();
+
+        private List<IPerson> _followers = new List<IPerson>();
+
+        private IJournal _journal;
+
+       public Person(
             string name,
             string surname,
             string patronomyc,
@@ -45,132 +53,75 @@ namespace ServerSide.UserManagement
             University = university;
             School = school;
             Age = age;
+            ID = Guid.NewGuid();
         }
 
-        public string Name
-        {
-            get => _name;
+        public string Name { get; set; }
 
-            set
+        public string Surname { get; set; }
+
+        public string Patronymcic { get; set; }
+
+        public DateTime BirthDate { get; set; }
+
+        public Gender Gender { get; set; }
+
+        public MaritalStatus MaritalStatus { get; set; }
+
+        public string University { get; set; }
+
+        public string School { get; set; }
+
+        public int Age { get; set; }
+
+        public Guid ID { get; }
+
+        public IJournal Journal => _journal;
+
+        public List<IPerson> Friends => _friends;
+
+        public List<IPerson> Followers => _followers;
+
+        public void AddFriend(IPerson person)
+        {
+            if (!_friends.Contains(person))
             {
-                Action(
-                    this,
-                    new PersonEventArgs(
-                        "изменил" + (_gender == Gender.Female ? "а" : string.Empty) + $"изменил имя на {value}"));
-                _name = value;
+                _friends.Add(person);
             }
         }
 
-        public string Surname
+        public void RemoveFriend(IPerson person)
         {
-            get => _surname;
-
-            set
+            if (_friends.Contains(person))
             {
-                Action(
-                    this,
-                    new PersonEventArgs(
-                        "изменил" + (_gender == Gender.Female ? "а" : string.Empty) + $"изменил фамилию на {value}"));
-                _surname = value;
+                _friends.Add(person);
             }
         }
 
-        public string Patronymcic
+        public void GetFollower(IPerson person)
         {
-            get => _patronomyc;
-
-            set
+            if (!_followers.Contains(person))
             {
-                Action(
-                    this,
-                    new PersonEventArgs(
-                        $"изменил" + (_gender == Gender.Female ? "а" : string.Empty) + $"отчество на {value}"));
-                _patronomyc = value;
+                _followers.Add(person);
             }
         }
 
-        public DateTime BirthDate
+        public void LoseFollower(IPerson person)
         {
-            get => _birthDay;
-
-            set
+            if (_followers.Contains(person))
             {
-                Action(
-                    this,
-                    new PersonEventArgs(
-                        "изменил" + (_gender == Gender.Female ? "а" : string.Empty) + $"дату рождения на {value}"));
-                _birthDay = value;
+                _followers.Remove(person);
             }
         }
 
-        public Gender Gender
+        public void AddNews(string info, object value, DateTime time)
         {
-            get => _gender;
-
-            set
-            {
-                Action(
-                    this,
-                    new PersonEventArgs(
-                        "изменил" + (_gender == Gender.Female ? "а" : string.Empty) + $"изменил пол на {value}"));
-                _gender = value;
-            }
+            _journal.Add(new Record(info, value, time));
         }
 
-        public MaritalStatus MaritalStatus
+        public override string ToString()
         {
-            get => _maritalStatus;
-
-            set
-            {
-                Action(
-                    this,
-                    new PersonEventArgs(
-                        "изменил" + (_gender == Gender.Female ? "а" : string.Empty) + $"изменил статус на {value}"));
-                _maritalStatus = value;
-            }
-        }
-
-        public string School
-        {
-            get => _school;
-
-            set
-            {
-                Action(
-                    this,
-                    new PersonEventArgs(
-                        "изменил" + (_gender == Gender.Female ? "а" : string.Empty) + $"изменил школу на {value}"));
-                _school = value;
-            }
-        }
-
-        public string University
-        {
-            get => _university;
-
-            set
-            {
-                Action(
-                    this,
-                    new PersonEventArgs(
-                        "изменил" + (_gender == Gender.Female ? "а" : string.Empty) + $"изменил университет на {value}"));
-                _university = value;
-            }
-        }
-
-        public int Age
-        {
-            get => _age;
-
-            set
-            {
-                Action(
-                    this,
-                    new PersonEventArgs(
-                        "изменил" + (_gender == Gender.Female ? "а" : string.Empty) + $"изменил возраст на {value}"));
-                _age = value;
-            }
+            return Name + " " + Surname;
         }
     }
 }
