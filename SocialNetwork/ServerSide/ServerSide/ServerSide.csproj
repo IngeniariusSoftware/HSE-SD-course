@@ -51,7 +51,12 @@
     <Compile Include="Interfaces\IProcess.cs" />
     <Compile Include="Connecting\ConnectionHandler.cs" />
     <Compile Include="Connecting\IConnectionHandler.cs" />
+    <Compile Include="Mapping\Mapper.cs" />
     <Compile Include="UserManagement\IPerson.cs" />
+    <Compile Include="UserManagement\Journaling\IJournal.cs" />
+    <Compile Include="UserManagement\Journaling\IRecord.cs" />
+    <Compile Include="UserManagement\Journaling\Journal.cs" />
+    <Compile Include="UserManagement\Journaling\Record.cs" />
     <Compile Include="UserManagement\Person.cs" />
     <Compile Include="UserManagement\PersonEventArgs.cs" />
     <Compile Include="Servicing\ServerEventArgs.cs" />

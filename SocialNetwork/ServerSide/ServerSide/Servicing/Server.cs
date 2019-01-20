@@ -10,6 +10,7 @@ namespace ServerSide.Servicing
     using ServerSide.Interfaces;
     using ServerSide.Logging;
     using ServerSide.Timing;
+    using ServerSide.UserManagement;
 
     public class Server : IServer, IProcess
     {
@@ -53,6 +54,8 @@ namespace ServerSide.Servicing
 
         private ILog _log;
 
+        private UserBase _userBase = new UserBase();
+
         public Server(IPAddress ip, int port, int bufferSize, int countConnections, ILog log)
         {
             _address = new IPEndPoint(ip, port);
@@ -62,6 +65,7 @@ namespace ServerSide.Servicing
             _timer = new TimeObserver();
             OperationHandled += _log.MakeRecord;
             _timer.ChangeState += _log.MakeRecord;
+            _userBase.Action += _log.MakeRecord;
         }
 
         public event ServerEventHandler OperationHandled = delegate { };
