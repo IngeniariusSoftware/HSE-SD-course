@@ -51,6 +51,9 @@
     <Compile Include="Interfaces\IProcess.cs" />
     <Compile Include="Connecting\ConnectionHandler.cs" />
     <Compile Include="Connecting\IConnectionHandler.cs" />
+    <Compile Include="UserManagement\IPerson.cs" />
+    <Compile Include="UserManagement\Person.cs" />
+    <Compile Include="UserManagement\PersonEventArgs.cs" />
     <Compile Include="Servicing\ServerEventArgs.cs" />
     <Compile Include="Servicing\IServer.cs" />
     <Compile Include="Timing\ITimeObserver.cs" />
@@ -61,6 +64,7 @@
     <Compile Include="Servicing\Server.cs" />
     <Compile Include="Timing\TimeEventArgs.cs" />
     <Compile Include="Timing\TimeObserver.cs" />
+    <Compile Include="UserManagement\UserDatabase.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

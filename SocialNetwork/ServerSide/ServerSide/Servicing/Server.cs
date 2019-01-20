@@ -6,29 +6,40 @@ namespace ServerSide.Servicing
     using System.Net;
     using System.Net.Sockets;
 
+    using ServerSide.Connecting;
     using ServerSide.Interfaces;
     using ServerSide.Logging;
-    using ServerSide.Connecting;
     using ServerSide.Timing;
 
     public class Server : IServer, IProcess
     {
-        private readonly Dictionary<string, string> _allCommands =
-            new Dictionary<string, string>
-                {
-                    { "block xxx.xxx.xxx.xxx", "Блокирует подключения от ip клиента" },
-                    { "close", "Завершает работу сервера" },
-                    { "end", "Завершает работу основных модулей" },
-                    { "help", "Показывает список доступных команд" },
-                    { "info", "Выводит информацию о сервере" },
-                    { "start", "Запускает основные модули сервера" },
-                    {
-                        "unlock xxx.xxx.xxx.xxx",
-                        "Снимает блокировку подключений от ip клиента"
-                    }
-                };
+        private readonly Dictionary<string, string> _allCommands = new Dictionary<string, string>()
+                                                                       {
+                                                                           {
+                                                                               "block xxx.xxx.xxx.xxx",
+                                                                               "Блокирует подключения от ip клиента"
+                                                                           },
+                                                                           { "close", "Завершает работу сервера" },
+                                                                           {
+                                                                               "end",
+                                                                               "Завершает работу основных модулей"
+                                                                           },
+                                                                           {
+                                                                               "help",
+                                                                               "Показывает список доступных команд"
+                                                                           },
+                                                                           { "info", "Выводит информацию о сервере" },
+                                                                           {
+                                                                               "start",
+                                                                               "Запускает основные модули сервера"
+                                                                           },
+                                                                           {
+                                                                               "unlock xxx.xxx.xxx.xxx",
+                                                                               "Снимает блокировку подключений от ip клиента"
+                                                                           }
+                                                                       };
 
-        private bool _isActive;
+        private bool _isActive; 
 
         private IConnectionHandler _connectionHandler;
 
