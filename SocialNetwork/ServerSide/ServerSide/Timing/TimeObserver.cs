@@ -22,7 +22,6 @@ namespace ServerSide.Timing
 
         public bool IsActive => _isActive;
 
-
         public void Start()
         {
             _isActive = true;
@@ -38,7 +37,7 @@ namespace ServerSide.Timing
 
         public void Remove()
         {
-            _calls.Remove();
+          _calls.Remove();
         }
 
         public void End()
@@ -59,11 +58,11 @@ namespace ServerSide.Timing
             _isWorking = true;
             while (_isActive)
             {
-                if (Math.Abs(_timeFrame.Day - DateTime.Today.Day) > 0)
-                {
-                    _timeFrame = DateTime.Today;
-                    ChangeState(this, new TimeEventArgs(true));
-                }
+                //if (Math.Abs(_timeFrame.Day - DateTime.Today.Day) > 0)
+                //{
+                //    _timeFrame = DateTime.Today;
+                //    ChangeState(this, new TimeEventArgs(true));
+                //}
 
                 Thread.Sleep(1000);
             }

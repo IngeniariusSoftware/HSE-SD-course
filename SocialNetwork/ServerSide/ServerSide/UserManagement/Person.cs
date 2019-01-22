@@ -3,35 +3,22 @@ namespace ServerSide.UserManagement
 {
     using System;
     using System.Collections.Generic;
+    using System.Threading;
 
     using ServerSide;
     using ServerSide.UserManagement.Journaling;
 
     public class Person : IPerson
     {
-        private string _name;
-
-        private string _surname;
-
-        private string _patronomyc;
-
-        private DateTime _birthDay;
-
-        private Gender _gender;
-
-        private MaritalStatus _maritalStatus;
-
-        private string _university;
-
-        private string _school;
-
-        private int _age;
-
         private List<IPerson> _friends = new List<IPerson>();
 
         private List<IPerson> _followers = new List<IPerson>();
 
         private IJournal _journal;
+
+        private Timer _birth;
+
+        private event PersonEventHandler BirthDay;
 
        public Person(
             string name,
@@ -43,7 +30,18 @@ namespace ServerSide.UserManagement
             string university,
             string school,
             int age)
-        {
+       {
+           long timeToBirth;
+           if (DateTime.Now > BirthDate.Date)
+           {
+               timeToBirth = (long)(DateTime.Now - BirthDate.Date).TotalMilliseconds;
+           }
+           else
+           {
+               timeToBirth = (long)(DateTime.Now - BirthDate.Date.AddYears(1)).TotalMilliseconds;
+           }
+
+           _birth = new Timer(new TimerCallback(Birth), this, timeToBirth, 60000);
             Name = name;
             Surname = surname;
             Patronymcic = patronomyc;
@@ -122,6 +120,12 @@ namespace ServerSide.UserManagement
         public override string ToString()
         {
             return Name + " " + Surname;
+        }
+
+        public void Birth(object obj)
+        {
+            _birth.Change((long)(DateTime.Now - BirthDate.Date.AddYears(1)).TotalMilliseconds, 60000);
+            BirthDay(null, null);
         }
     }
 }
