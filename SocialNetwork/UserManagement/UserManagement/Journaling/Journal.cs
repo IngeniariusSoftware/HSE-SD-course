@@ -1,11 +1,13 @@
 ﻿
-namespace ServerSide.UserManagement.Journaling
+namespace UserManagement.Journaling
 {
+    using System;
     using System.Collections.Generic;
 
+    [Serializable]
     public class Journal : IJournal
     {
-        private List<IRecord> _news;
+        private List<IRecord> _news = new List<IRecord>();
 
         public List<IRecord> News => _news;
 

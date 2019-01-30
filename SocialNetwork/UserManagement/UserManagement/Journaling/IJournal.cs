@@ -1,5 +1,5 @@
 ﻿
-namespace ServerSide.UserManagement.Journaling
+namespace UserManagement.Journaling
 {
     using System.Collections.Generic;
 
