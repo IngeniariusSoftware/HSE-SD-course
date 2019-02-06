@@ -1,8 +1,25 @@
 ﻿
 namespace ServerSide.Servicing
 {
-    internal interface IServer
+    using System.Net;
+
+    using ServerSide.Logging;
+    using ServerSide.Processing;
+
+    internal interface IServer : IProcess
     {
-        bool IsActive { get; }
+        event ProcessEventHandler ModuleChangeState;
+
+        IPEndPoint Address { get; }
+
+        int BufferSize { get; }
+
+        int MaxCountConnections { get; }
+
+        ILog Log { get; }
+
+        string Manage(string command);
+
+        void Subscribing();
     }
 }
