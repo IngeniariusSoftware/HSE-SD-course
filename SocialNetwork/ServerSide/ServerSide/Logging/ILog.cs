@@ -3,8 +3,12 @@ namespace ServerSide.Logging
 {
     using System;
 
-    public interface ILog
+    using ServerSide.Processing;
+
+    public interface ILog : IProcess
     {
-        void MakeRecord(object sender, EventArgs e);
+        event ProcessEventHandler OperationCompleted;
+
+        void AddRecord(object sender, EventArgs e);
     }
 }
