@@ -2,26 +2,44 @@
 namespace ServerSide.Logging
 {
     using System;
+    using System.Collections.Generic;
     using System.IO;
     using System.Text;
+    using System.Threading;
 
-    using ServerSide.Connecting;
-    using ServerSide.Interfaces;
+    using ServerSide.Handling;
+    using ServerSide.Networking;
+    using ServerSide.Processing;
     using ServerSide.Servicing;
-    using ServerSide.Timing;
 
-    public class Log : ILog, IProcess
+    using UserManagement.Users;
+
+    public class Log : ILog
     {
+        private readonly EventWaitHandle _recordAdded = new AutoResetEvent(false);
+
+        private readonly EventWaitHandle _recordRemoved = new AutoResetEvent(false);
+
+        private readonly EventWaitHandle _isEnd = new AutoResetEvent(false);
+
+        private readonly object _locker = new object();
+
         private readonly string _filePath;
+
+        private int _sizeRecordQueue;
 
         private int _recordCount;
 
         private StreamWriter _fileWriter;
 
-        private bool _isActive;
+        private Queue<(object sender, EventArgs e)> _records;
 
-        public Log()
+        private StringBuilder _buffer = new StringBuilder(1024);
+
+        public Log(int sizeRecordQueue)
         {
+            _sizeRecordQueue = sizeRecordQueue;
+            _records = new Queue<(object sender, EventArgs e)>(sizeRecordQueue);
             _filePath = "Logs\\";
             if (!Directory.Exists(_filePath))
             {
@@ -40,99 +58,226 @@ namespace ServerSide.Logging
             file.Close();
         }
 
-        public bool IsActive => _isActive;
+        public event ProcessEventHandler StateChanged = delegate { };
+
+        public event ProcessEventHandler OperationCompleted = delegate { };
+
+        public bool IsActive { get; private set; }
+
+        public int SizeMessageQueue
+        {
+            get => _sizeRecordQueue;
+
+            set => _sizeRecordQueue = Math.Max(1, value);
+        }
 
         public void Start()
         {
-            _recordCount = 1;
-            _fileWriter = new StreamWriter(_filePath);
-            Write("Событие: Логирование запущено\n");
-            _isActive = true;
+            if (!IsActive)
+            {
+                IsActive = true;
+                _recordCount = 1;
+                _fileWriter = new StreamWriter(_filePath);
+                new Thread(Handling) { Name = "Поток логирования" }.Start();
+                StateChanged(this, new ProcessEventArgs("Логирование запущено"));
+            }
+            else
+            {
+                OperationCompleted(this, new ProcessEventArgs("Модуль логирования уже включен!"));
+            }
         }
 
         public void End()
         {
-            Write("Событие: Логирование завершено\n");
-            _fileWriter.Close();
-            _isActive = false;
+            if (IsActive)
+            {
+                IsActive = false;
+                StateChanged(this, new ProcessEventArgs("Завершение логирования"));
+
+                while (!_isEnd.WaitOne(100))
+                {
+                    OperationCompleted(this, new ProcessEventArgs("Ожидание завершение работы логирования..."));
+                }
+            }
+            else
+            {
+                OperationCompleted(this, new ProcessEventArgs("Модуль логирования уже выключен!"));
+            }
         }
 
-        public void MakeRecord(object sender, EventArgs e)
+        public void AddRecord(object sender, EventArgs e)
         {
-            StringBuilder message = new StringBuilder(1024);
+            if (IsActive)
+            {
+                lock (_locker)
+                {
+                    if (_records.Count > _sizeRecordQueue)
+                    {
+                        OperationCompleted(this, new ProcessEventArgs("Очередь сообщений логирования переполнена!\n"));
+                        _recordRemoved.WaitOne(100);
+                    }
+
+                    _records.Enqueue((sender, e));
+                    _recordAdded.Set();
+                }
+            }
+            else
+            {
+                OperationCompleted(this, new ProcessEventArgs("Модуль логирования отключен!\n"));
+            }
+        }
+
+        private void Handling()
+        {
+            while (IsActive || _records.Count > 0)
+            {
+                _recordAdded.WaitOne(100);
+                while (_records.Count > 0)
+                {
+                    var (sender, e) = _records.Dequeue();
+                    _recordRemoved.Set();
+                    HandleRecord(sender, e);
+                }
+            }
+
+            _fileWriter.Close();
+            _isEnd.Set();
+        }
+
+        private void HandleRecord(object sender, EventArgs e)
+        {
+            _buffer.Clear();
+            _buffer.AppendLine($"Номер лога #{_recordCount++}");
+            _buffer.AppendLine($"Дата лога: {DateTime.Now}");
+
             switch (true)
             {
-                case true when sender is IServer:
+                case true when sender is ILog log:
                     {
-                        var server = (IServer)sender;
-                        var eventInfo = (ServerEventArgs)e;
-                        message.AppendLine($"Событие: {eventInfo.OperationInfo}");
+                        var eventInfo = (ProcessEventArgs)e;
+                        _buffer.AppendLine($"Событие: {eventInfo.OperationInfo}");
+                        _buffer.AppendLine("Отправитель: Модуль логирования");
+                        _buffer.AppendLine($"Размер очереди для обработки логов: {_sizeRecordQueue}");
+                        break;
+                    }
+
+                case true when sender is IServer server:
+                    {
+                        var eventInfo = (ProcessEventArgs)e;
+                        _buffer.AppendLine($"Событие: {eventInfo.OperationInfo}");
+                        _buffer.AppendLine("Отправитель: Сервер");
+                        _buffer.AppendLine($"Адрес сервера: {server.Address}");
+                        _buffer.AppendLine($"Размер буфера данных: {server.BufferSize / 1024.0:F4} кб.");
+                        _buffer.AppendLine(
+                            $"Максимальное количество одновременных подключений: {server.MaxCountConnections}");
+                        break;
+                    }
+
+                case true when sender is IMessageHandler messageHandler:
+                    {
+                        switch (true)
+                        {
+                            case true when e is ConnectionEventArgs eventInfo:
+                                {
+                                    _buffer.AppendLine($"Событие: {eventInfo.OperationInfo}");
+                                    _buffer.AppendLine("Отправитель: Модуль обработки сообщений");
+                                    _buffer.AppendLine($"Время обработки операции: {eventInfo.ProcessingTime} мс.");
+                                    break;
+                                }
+
+                            case true when e is ProcessEventArgs eventInfo:
+                                {
+                                    _buffer.AppendLine($"Событие: {eventInfo.OperationInfo}");
+                                    _buffer.AppendLine("Отправитель: Модуль обработки сообщений");
+                                    _buffer.AppendLine(
+                                        $"Размер очереди для обработки запросов: {messageHandler.SizePackageQueue}");
+                                    break;
+                                }
+                        }
 
                         break;
                     }
 
-                case true when sender is IConnectionHandler:
+                case true when sender is UserBase userBase:
                     {
-                        var connectionHandler = (IConnectionHandler)sender;
-                        var eventInfo = (ServerEventArgs)e;
-                        
-                        if (eventInfo.GetAddress != null)
-                        {
-                            message.AppendLine($"Операция: {eventInfo.OperationInfo}");
-                            message.AppendLine($"Адрес отправителя: {eventInfo.GetAddress}");
-                            message.AppendLine($"Вес сообщения: {eventInfo.DataSize / 1024.0:F4} кб.");
-                            message.AppendLine($"Время обработки: {eventInfo.HandlingTime / 1000.0} сек.");
-                        }
-                        else
-                        {
-                            message.AppendLine($"Событие: {eventInfo.OperationInfo}");
-                            if (connectionHandler.IsActive)
-                            {
-                                message.AppendLine($"Адрес модуля: {connectionHandler.Address}");
-                                message.AppendLine($"Размер буфера данных: {connectionHandler.BufferSize / 1024.0:F4} кб.");
-                                message.AppendLine($"Размер стека для обработки запросов: {connectionHandler.MaxCountConnections}");
-                            }
-                        }
-                        
+                        var eventInfo = (ProcessEventArgs)e;
+                        _buffer.AppendLine($"Событие: {eventInfo.OperationInfo}");
+                        _buffer.AppendLine("Отправитель: База пользователей");
                         break;
                     }
 
-                case true when sender is ITimeObserver:
+                case true when sender is ConnectionReceiver connectionHandler:
                     {
-                        var eventInfo = (TimeEventArgs)e;
-                        if (eventInfo.IsNewDay)
+                        switch (true)
                         {
-                            message.AppendLine("Событие новый день");
-                        }
-                        else
-                        {
-                            message.AppendLine($"Событие: {eventInfo.OperationInfo}");
+                            case true when e is ConnectionEventArgs eventInfo:
+                                {
+                                    _buffer.AppendLine($"Событие: {eventInfo.OperationInfo}");
+                                    _buffer.AppendLine("Отправитель: Модуль обработки подключений");
+                                    _buffer.AppendLine($"Пользователь отправитель: {eventInfo.Address}");
+                                    _buffer.AppendLine(
+                                        $"Тип сообщения: {((byte[])eventInfo.Data).Length / 1024.0:F4} кб.");
+                                    break;
+                                }
+
+                            case true when e is ProcessEventArgs eventInfo:
+                                {
+                                    _buffer.AppendLine($"Событие: {eventInfo.OperationInfo}");
+                                    _buffer.AppendLine("Отправитель: Модуль обработки подключений");
+                                    _buffer.AppendLine(
+                                        $"Размер буфера данных: {connectionHandler.BufferSize / 1024.0:F4} кб.");
+                                    _buffer.AppendLine(
+                                        $"Максимальное количество одновременных подключений: {connectionHandler.MaxCountConnections}");
+                                    break;
+                                }
                         }
 
+                        break;
+                    }
+
+                case true when sender is ConnectionSender connectionSender:
+                    {
+                        switch (true)
+                        {
+                            case true when e is ConnectionEventArgs eventInfo:
+                                {
+                                    _buffer.AppendLine($"Событие: {eventInfo.OperationInfo}");
+                                    _buffer.AppendLine("Отправитель: Модуль отправки сообщений");
+                                    break;
+                                }
+
+                            case true when e is ProcessEventArgs eventInfo:
+                                {
+                                    _buffer.AppendLine($"Событие: {eventInfo.OperationInfo}");
+                                    _buffer.AppendLine("Отправитель: Модуль отправки сообщений");
+                                    _buffer.AppendLine(
+                                        $"Размер очереди для обработки запросов: {connectionSender.SizePackageQueue}");
+                                    break;
+                                }
+                        }
+
+                        break;
+                    }
+
+                case true when sender is IUser person:
+                    {
+                        var eventInfo = (UserEventArgs)e;
+                        _buffer.AppendLine($"Событие: {eventInfo.Info}");
+                        _buffer.AppendLine($"Отправитель: Пользователь {person}");
                         break;
                     }
 
                 default:
                     {
-                        message.AppendLine("Событие: Не удалось распознать событие");
-                        message.AppendLine($"Отправитель: {sender}");
-                        message.AppendLine($"Мета события: {e}");
+                        _buffer.AppendLine("Событие: Не удалось распознать событие");
+                        _buffer.AppendLine($"Отправитель: {sender}");
+                        _buffer.AppendLine($"Информация о событии: {e}");
                         break;
                     }
             }
 
-            Write(message.ToString());
-        }
-
-        public void Write(string data)
-        {
-            StringBuilder record = new StringBuilder(1024);
-            record.AppendLine($"Номер лога #{_recordCount++}");
-            record.AppendLine($"Дата лога: {DateTime.Now}");
-            record.AppendLine(data);
-            _fileWriter.Write(record);
-            Console.Write(record);
+            _fileWriter.WriteLine(_buffer);
+            OperationCompleted(this, new ProcessEventArgs(_buffer.ToString()));
         }
     }
-
 }
