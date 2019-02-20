@@ -2,34 +2,21 @@
 namespace ServerSide
 {
     using System;
-    using System.Net;
-    using System.Net.Sockets;
+    using System.Windows.Forms;
 
-    using ServerSide.Logging;
-    using ServerSide.Servicing;
+    using ServerSide.UI;
 
-    class Program
+    public static class Program
     {
-        private static Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-
-        static void Main()
+        /// <summary>
+        /// Главная точка входа для приложения.
+        /// </summary>
+        [STAThread]
+        private static void Main()
         {
-            Console.Title = "Сервер";
-
-            var log = new Log();
-            log.Start();
-
-            Server server = new Server(IPAddress.Any, 904, 10500000, 10000, log);
-            server.Start();
-
-            log.End();
-
-            //var crypter = new Encryptor("Server", log);
-            //var messageHandler = new MessageHandler(8, 8, 64, 16, crypter);
-
-
-            Console.WriteLine("\nДля завершения работы нажмите любую клавишу");
-            Console.ReadKey(true);
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new ServerPanelForm());
         }
     }
 }

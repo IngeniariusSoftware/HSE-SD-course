@@ -1,30 +1,21 @@
 ﻿
 namespace ServerSide.Servicing
 {
-    using System;
     using System.Collections.Generic;
     using System.Net;
-    using System.Net.Sockets;
+    using System.Text;
 
-    using ServerSide.Connecting;
-    using ServerSide.Interfaces;
+    using ServerSide.Handling;
     using ServerSide.Logging;
-    using ServerSide.Timing;
-    using ServerSide.UserManagement;
+    using ServerSide.Networking;
+    using ServerSide.Processing;
 
-    public class Server : IServer, IProcess
+    public class Server : IServer
     {
         private readonly Dictionary<string, string> _allCommands = new Dictionary<string, string>()
                                                                        {
-                                                                           {
-                                                                               "block xxx.xxx.xxx.xxx",
-                                                                               "Блокирует подключения от ip клиента"
-                                                                           },
-                                                                           { "close", "Завершает работу сервера" },
-                                                                           {
-                                                                               "end",
-                                                                               "Завершает работу основных модулей"
-                                                                           },
+                                                                           { "begin", "Запускает работу сервера" },
+                                                                           { "end", "Завершает работу сервера" },
                                                                            {
                                                                                "help",
                                                                                "Показывает список доступных команд"
@@ -35,169 +26,165 @@ namespace ServerSide.Servicing
                                                                                "Запускает основные модули сервера"
                                                                            },
                                                                            {
-                                                                               "unlock xxx.xxx.xxx.xxx",
-                                                                               "Снимает блокировку подключений от ip клиента"
+                                                                               "close",
+                                                                               "Выключает основные модули сервера"
                                                                            }
                                                                        };
 
-        private bool _isActive; 
-
-        private IConnectionHandler _connectionHandler;
-
-        private ITimeObserver _timer;
-
-        private IPEndPoint _address;
-
-        private int _bufferSize;
-
-        private int _maxCountConnections;
-
         private ILog _log;
 
-        private UserBase _userBase = new UserBase();
+        private UserBase _userBase;
 
-        public Server(IPAddress ip, int port, int bufferSize, int countConnections, ILog log)
+        private IConnection _connectionHandler;
+
+        private IMessageHandler _messageHandler;
+
+        private ConnectionSender _connectionSender;
+
+        public Server(IPAddress ip, int port, int bufferSize, int countConnections)
         {
-            _address = new IPEndPoint(ip, port);
-            _bufferSize = bufferSize;
-            _maxCountConnections = countConnections;
-            _log = log;
-            _timer = new TimeObserver();
-            OperationHandled += _log.MakeRecord;
-            _timer.ChangeState += _log.MakeRecord;
-            _userBase.Action += _log.MakeRecord;
+            BufferSize = bufferSize;
+            MaxCountConnections = countConnections;
+            Address = new IPEndPoint(ip, port);
+            _log = new Log(512);
+            _userBase = new UserBase();
+            _messageHandler = new MessageHandler(256, _userBase);
+            _connectionHandler = new ConnectionReceiver(new IPEndPoint(ip, port), bufferSize, countConnections);
+            _connectionSender = new ConnectionSender(256);
         }
 
-        public event ServerEventHandler OperationHandled = delegate { };
+        public event ProcessEventHandler ModuleChangeState = delegate { };
 
-        public bool IsActive => _isActive;
+        public event ProcessEventHandler StateChanged = delegate { };
 
-        public IPEndPoint Address => _address;
+        public ILog Log => _log;
+
+        public bool IsActive { get; private set; }
+
+        public IPEndPoint Address { get; }
+
+        public int BufferSize { get; }
+
+        public int MaxCountConnections { get; }
+
+        public void Subscribing()
+        {
+            ModuleChangeState += _log.AddRecord;
+
+            StateChanged += ModuleChangeState;
+
+            _messageHandler.StateChanged += ModuleChangeState;
+            _messageHandler.OperationHandled += _log.AddRecord;
+            _messageHandler.OperationHandled += _connectionSender.AddMessage;
+
+            _connectionHandler.StateChanged += ModuleChangeState;
+            _connectionHandler.OperationHandled += _log.AddRecord;
+            _connectionHandler.OperationHandled += _messageHandler.AddMessage;
+
+            _userBase.Action += _log.AddRecord;
+            _userBase.BirthDay += _log.AddRecord;
+            _userBase.OperationCompleted += _log.AddRecord;
+
+            _connectionSender.StateChanged += ModuleChangeState;
+            _connectionSender.OperationHandled += _log.AddRecord;
+
+            _log.StateChanged += ModuleChangeState;
+        }
 
         public void Start()
         {
-            _isActive = true;
-            OperationHandled(this, new ServerEventArgs("Сервер запущен"));
-            Manage();
+            IsActive = true;
+            StateChanged(this, new ProcessEventArgs("Сервер запущен"));
         }
 
         public void End()
         {
-            _isActive = false;
-            OperationHandled(this, new ServerEventArgs("Выключение сервера"));
+            IsActive = false;
+            StateChanged(this, new ProcessEventArgs("Выключение сервера..."));
+            EndModules();
         }
 
-        private void Manage()
+        public string Manage(string command)
         {
-            OperationHandled(this, new ServerEventArgs("Командный терминал управления сервером запущен"));
-            string command;
-            do
+            if (IsActive || command == "begin")
             {
-                Console.WriteLine("Введите команду для управления сервером\n");
-                command = Console.ReadLine();
-                Console.WriteLine();
-
                 switch (command)
                 {
                     case "info":
                         {
-                            OperationHandled(this, new ServerEventArgs("Сервер работает"));
-                            break;
+                            StateChanged(this, new ProcessEventArgs("Сервер работает"));
+                            return "Сервер включен";
                         }
 
                     case "help":
                         {
-                            Help();
-                            break;
+                            return Help();
                         }
 
-                    case "close":
+                    case "begin":
                         {
-                            if (_timer.IsActive)
-                            {
-                                _timer.End();
-                            }
-
-                            if (_connectionHandler != null && _connectionHandler.IsActive)
-                            {
-                                _connectionHandler.End();
-                            }
-
-                            End();
-                            break;
-                        }
-
-                    case "start":
-                        {
-                            if (_timer.IsActive)
-                            {
-                                Console.WriteLine("\nТаймер уже включен\n");
-                            }
-                            else
-                            {
-                                _timer.Start();
-                            }
-
-                            if (_connectionHandler != null && _connectionHandler.IsActive)
-                            {
-                                Console.WriteLine("\nМодуль обработки подключений уже включен\n");
-                            }
-                            else
-                            {
-                                _connectionHandler = new ConnectionHandler(
-                                    new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp),
-                                    Address,
-                                    _bufferSize,
-                                    _maxCountConnections);
-                                _connectionHandler.OperationHandled += _log.MakeRecord;
-                                _connectionHandler.Start();
-                            }
-
-                            break;
+                            Start();
+                            return "Сервер включен";
                         }
 
                     case "end":
                         {
-                            if (!_timer.IsActive)
-                            {
-                                Console.WriteLine("\nТаймер уже выключен\n");
-                            }
-                            else
-                            {
-                                _timer.End();
-                            }
+                            End();
+                            return "Сервер выключен";
+                        }
 
-                            if (_connectionHandler == null || !_connectionHandler.IsActive)
-                            {
-                                Console.WriteLine("\nМодуль обработки подключений уже выключен\n");
-                            }
-                            else
-                            {
-                                _connectionHandler.End();
-                            }
+                    case "start":
+                        {
+                            StartModules();
+                            return "Модули сервера запущены";
+                        }
 
-                            break;
+                    case "close":
+                        {
+                            EndModules();
+                            return "Работа модулей сервера завершена";
                         }
 
                     default:
                         {
-                            Console.WriteLine(
-                                "\nТакой команды не существует\nДля получения списка доступных команд введите \"help\"\n");
-                            break;
+                            return "Такой команды не существует. Для получения списка доступных команд введите 'help'";
                         }
                 }
             }
-            while (command != "close");
+            else
+            {
+                return "Сервер выключен. Для запуска введите 'begin'";
+            }
         }
 
-        private void Help()
+        private string Help()
         {
-            Console.WriteLine("\nСписок команд:\n");
+            var info = new StringBuilder(1024);
+            info.AppendLine("\nСписок команд:\n");
             int commandNumber = 0;
             foreach (KeyValuePair<string, string> command in _allCommands)
             {
-                Console.WriteLine($"{++commandNumber}) {command.Key} - {command.Value}\n");
+                info.AppendLine();
+                info.AppendLine($"{++commandNumber}) {command.Key} - {command.Value}");
             }
+
+            return info.ToString();
+        }
+
+        private void StartModules()
+        {
+            _log.Start();
+            _connectionSender.Start();
+            _messageHandler.Start();
+            _connectionHandler.Start();
+        }
+
+        private void EndModules()
+        {
+            _connectionHandler.End();
+            _messageHandler.End();
+            _connectionSender.End();
+            _log.End();
         }
     }
 }
