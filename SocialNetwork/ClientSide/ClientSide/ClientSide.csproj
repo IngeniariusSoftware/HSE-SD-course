@@ -8,10 +8,11 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>ClientSide</RootNamespace>
     <AssemblyName>ClientSide</AssemblyName>
-    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -33,6 +34,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Datagrams">
+      <HintPath>Libraries\Datagrams.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -44,33 +48,101 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="UserManagement">
+      <HintPath>Libraries\UserManagement.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Client.cs" />
-    <Compile Include="Form1.cs">
+    <Compile Include="Mapping\Mapper.cs" />
+    <Compile Include="UI\Edit\EditForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="UI\Edit\EditForm.Designer.cs">
+      <DependentUpon>EditForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\MainPage\MainPageForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\MainPage\MainPageForm.Designer.cs">
+      <DependentUpon>MainPageForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\News\NewsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\News\NewsForm.Designer.cs">
+      <DependentUpon>NewsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\People\PeopleForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\People\PeopleForm.Designer.cs">
+      <DependentUpon>PeopleForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Аuthentication\АuthenticationForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Аuthentication\АuthenticationForm.Designer.cs">
+      <DependentUpon>АuthenticationForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="UI\Registration\RegistrationForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Registration\RegistrationForm.Designer.cs">
+      <DependentUpon>RegistrationForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\SignUp\SignUpForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\SignUp\SignUpForm.Designer.cs">
+      <DependentUpon>SignUpForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Home\HomeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Home\HomeForm.Designer.cs">
+      <DependentUpon>HomeForm.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="UI\Edit\EditForm.resx">
+      <DependentUpon>EditForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Home\HomeForm.resx">
+      <DependentUpon>HomeForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\MainPage\MainPageForm.resx">
+      <DependentUpon>MainPageForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\News\NewsForm.resx">
+      <DependentUpon>NewsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\People\PeopleForm.resx">
+      <DependentUpon>PeopleForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Аuthentication\АuthenticationForm.resx">
+      <DependentUpon>АuthenticationForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
+    <EmbeddedResource Include="UI\Registration\RegistrationForm.resx">
+      <DependentUpon>RegistrationForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\SignUp\SignUpForm.resx">
+      <DependentUpon>SignUpForm.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
@@ -79,6 +151,63 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MonkeyHelloLogo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MonkeyPasswordLogo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AcceptIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ConnectionIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ConnectionSettingsIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ErrorIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ReconnectIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MonkeySitIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MonkeySignUpLogo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\UserIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FollowerIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\HomeIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\NewsIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PeopleIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\EditIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FriendIcon .png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CameraIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ExitIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ProfileIcon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

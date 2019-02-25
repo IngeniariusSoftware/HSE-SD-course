@@ -1,11 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
+﻿
 namespace ClientSide
 {
+    using System;
+    using System.Windows.Forms;
+
+    using ClientSide.UI.MainPage;
+    using ClientSide.UI.Аuthentication;
+
     static class Program
     {
         /// <summary>
@@ -16,7 +17,11 @@ namespace ClientSide
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new АuthenticationForm());
+            if (Client.Instance.User != null)
+            {
+                Application.Run(new MainPageForm());
+            }
         }
     }
 }
