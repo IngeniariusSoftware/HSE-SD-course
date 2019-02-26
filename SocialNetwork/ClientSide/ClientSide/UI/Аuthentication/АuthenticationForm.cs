@@ -38,7 +38,7 @@ namespace ClientSide.UI.Аuthentication
 
         private void PasswordTextBox_Enter(object sender, EventArgs e)
         {
-            PasswordTextBox.PasswordChar = '⚫';
+            PasswordTextBox.PasswordChar = '*';
             Logo.Image.Dispose();
             Logo.Image = Resources.MonkeyPasswordLogo;
 
@@ -62,7 +62,7 @@ namespace ClientSide.UI.Аuthentication
             }
             else
             {
-                PasswordTextBox.PasswordChar = '⚫';
+                PasswordTextBox.PasswordChar = '*';
             }
         }
 
@@ -154,7 +154,7 @@ namespace ClientSide.UI.Аuthentication
         {
             if (PasswordTextBox.PasswordChar == char.MinValue && PasswordTextBox.ForeColor != Color.DarkGray)
             {
-                PasswordTextBox.PasswordChar = '⚫';
+                PasswordTextBox.PasswordChar = '*';
                 Logo.Image.Dispose();
                 Logo.Image = Resources.MonkeyPasswordLogo;
             }
@@ -162,7 +162,7 @@ namespace ClientSide.UI.Аuthentication
 
         private void Logo_MouseDown(object sender, MouseEventArgs e)
         {
-            if (PasswordTextBox.PasswordChar == '⚫' && PasswordTextBox.ForeColor != Color.DarkGray
+            if (PasswordTextBox.PasswordChar == '*' && PasswordTextBox.ForeColor != Color.DarkGray
                                                     && PasswordTextBox.Focused)
             {
                 PasswordTextBox.PasswordChar = char.MinValue;

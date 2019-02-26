@@ -87,7 +87,7 @@ namespace ClientSide.UI.SignUp
             var inputElement = (TextBox)sender;
             if (inputElement.ForeColor == Color.DarkGray)
             {
-                inputElement.PasswordChar = '⚫';
+                inputElement.PasswordChar = '*';
             }
         }
 
