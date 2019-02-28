@@ -1,66 +1,63 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Program_Elements;
-
-namespace Structures
+﻿
+namespace Tree_identification
 {
+    using System;
+
+    [Serializable]
     public class BinaryTree
     {
-        private Identificator _root;
+        public Identificator Root;
 
-        private BinaryTree _leftBranch;
+        public BinaryTree LeftBranch;
 
-        private BinaryTree _rightBranch;
+        public BinaryTree RightBranch;
 
         public BinaryTree()
         {
-            _root = null;
-            _leftBranch = null;
-            _rightBranch = null;
+            Root = null;
+            LeftBranch = null;
+            RightBranch = null;
         }
 
         public BinaryTree(Identificator root)
         {
-            _root = root;
-            _leftBranch = null;
-            _rightBranch = null;
+            Root = root;
+            LeftBranch = null;
+            RightBranch = null;
         }
 
         public void Add(Identificator element)
         {
             BinaryTree shelf = this;
-            if (shelf._root != null)
+            if (shelf.Root != null)
             {
-                if (element.Hash >= _root.Hash)
+                if (element.Hash >= Root.Hash)
                 {
-                    if (_rightBranch != null)
+                    if (RightBranch != null)
                     {
-                        _rightBranch.Add(element);
+                        RightBranch.Add(element);
 
                     }
                     else
                     {
-                        _rightBranch = new BinaryTree(element);
+                        RightBranch = new BinaryTree(element);
                     }
                 }
                 else
                 {
-                    if (_leftBranch != null)
+                    if (LeftBranch != null)
                     {
-                        _leftBranch.Add(element);
+                        LeftBranch.Add(element);
                     }
                     else
                     {
-                        _leftBranch = new BinaryTree(element);
+                        LeftBranch = new BinaryTree(element);
                     }
                 }
             }
             else
             {
-                shelf._root = element;
+                shelf.Root = element;
             }
         }
     }

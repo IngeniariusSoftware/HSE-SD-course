@@ -1,15 +1,23 @@
-﻿namespace Program_Elements
+﻿
+namespace Tree_identification
 {
-    class Const : Identificator
+    using System;
+
+    [Serializable]
+    public class Const : Identificator
     {
-        private string _value;
+        public string Value;
+
+        public Const()
+        {
+        }
 
         public Const(
             string name,
             string value,
             Types.Value valueType,
-            Types.Identificator identType = Types.Identificator.consts)
+            Types.Identification identType = Types.Identification.consts)
             : base(name, valueType, identType) =>
-            _value = value;
+            Value = value;
     }
 }

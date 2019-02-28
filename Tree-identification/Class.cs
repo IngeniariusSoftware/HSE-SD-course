@@ -1,10 +1,18 @@
-﻿namespace Program_Elements
+﻿
+namespace Tree_identification
 {
-    class Class : Identificator
+    using System;
+
+    [Serializable]
+    public class Class : Identificator
     {
+        public Class()
+        {
+        }
+
         public Class(
             string name,
-            Types.Identificator identType = Types.Identificator.classes,
+            Types.Identification identType = Types.Identification.classes,
             Types.Value valueType = Types.Value.class_type)
             : base(name, valueType, identType)
         {

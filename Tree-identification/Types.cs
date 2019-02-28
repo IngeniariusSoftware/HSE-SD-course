@@ -1,8 +1,12 @@
-﻿namespace Program_Elements
+﻿
+namespace Tree_identification
 {
-    public class Types
+    using System;
+
+    [Serializable]
+    public static class Types
     {
-        public enum Identificator
+        public enum Identification
         {
             classes,
 
@@ -72,7 +76,7 @@
                     {
                         return Value.string_type;
                     }
-                    
+
                 default:
                     {
                         return Value.void_type;
