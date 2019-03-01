@@ -1,8 +1,16 @@
-﻿namespace Program_Elements
+﻿
+namespace Tree_identification
 {
-    class Variable : Identificator
+    using System;
+
+    [Serializable]
+    public class Variable : Identificator
     {
-        public Variable(string name, Types.Value valueType, Types.Identificator identType = Types.Identificator.vars)
+        public Variable()
+        {
+        }
+
+        public Variable(string name, Types.Value valueType, Types.Identification identType = Types.Identification.vars)
             : base(name, valueType, identType)
         {
         }

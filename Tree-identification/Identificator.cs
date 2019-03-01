@@ -1,21 +1,34 @@
-﻿namespace Program_Elements
+﻿
+namespace Tree_identification
 {
-    abstract public class Identificator
-    {
-        public Identificator(string name, Types.Value valueType, Types.Identificator identType)
-        {
-            _name = name;
-            Hash = name.GetHashCode();
-            _valueType = valueType;
-            _identType = identType;
-        }
+    using System;
+    using System.Xml.Serialization;
 
-        private string _name;
+    [XmlInclude(typeof(Variable))]
+    [XmlInclude(typeof(Const))]
+    [XmlInclude(typeof(Method))]
+    [XmlInclude(typeof(Class))]
+    [Serializable]
+    public abstract class Identificator
+    {
+        public string Name;
 
         public int Hash;
 
-        private Types.Identificator _identType;
+        public Types.Identification IdentType;
 
-        private Types.Value _valueType;
+        public Types.Value ValueType;
+
+        public Identificator()
+        {
+        }
+
+        public Identificator(string name, Types.Value valueType, Types.Identification identType)
+        {
+            Name = name;
+            Hash = name.GetHashCode();
+            ValueType = valueType;
+            IdentType = identType;
+        }
     }
 }

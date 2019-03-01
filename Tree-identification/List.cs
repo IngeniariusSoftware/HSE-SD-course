@@ -1,38 +1,37 @@
-﻿using System.Collections.Generic;
-
-namespace Structures
+﻿
+namespace Tree_identification
 {
-    using System.Text.RegularExpressions;
+    using System;
+    using System.Collections.Generic;
 
-    using Program_Elements;
-
+    [Serializable]
     public class List
     {
-        private List _nextElement;
+        public List NextElement;
 
-        private (Types.Value, Types.Parameter) _argument;
+        public (Types.Value, Types.Parameter) Argument;
 
         public List()
         {
-            _argument.Item1 = Types.Value.void_type;
-            _argument.Item2 = Types.Parameter.param_val;
-            _nextElement = null;
+            Argument.Item1 = Types.Value.void_type;
+            Argument.Item2 = Types.Parameter.param_val;
+            NextElement = null;
         }
 
         public List((Types.Value value, Types.Parameter parameter) argument)
         {
-            _argument.Item1 = argument.value;
-            _argument.Item2 = argument.parameter;
-            _nextElement = null;
+            Argument.Item1 = argument.value;
+            Argument.Item2 = argument.parameter;
+            NextElement = null;
         }
 
         public List(List<(Types.Value, Types.Parameter)> arguments)
         {
             if (arguments.Count > 0)
             {
-                _argument.Item1 = arguments[0].Item1;
-                _argument.Item2 = arguments[0].Item2;
-                _nextElement = null;
+                Argument.Item1 = arguments[0].Item1;
+                Argument.Item2 = arguments[0].Item2;
+                NextElement = null;
                 for (int i = 1; i < arguments.Count; i++)
                 {
                     AddElement(new List(arguments[i]));
@@ -40,21 +39,21 @@ namespace Structures
             }
             else
             {
-                _argument.Item1 = Types.Value.void_type;
-                _argument.Item2 = Types.Parameter.param_val;
-                _nextElement = null;
+                Argument.Item1 = Types.Value.void_type;
+                Argument.Item2 = Types.Parameter.param_val;
+                NextElement = null;
             }
         }
 
         public void AddElement(List element)
         {
             List shelf = this;
-            while (shelf._nextElement !=null)
+            while (shelf.NextElement != null)
             {
-                shelf = shelf._nextElement;
+                shelf = shelf.NextElement;
             }
 
-            shelf._nextElement = element;
+            shelf.NextElement = element;
         }
     }
 }

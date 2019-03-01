@@ -1,15 +1,23 @@
-﻿namespace Program_Elements
+﻿
+namespace Tree_identification
 {
-    class Method : Identificator
+    using System;
+
+    [Serializable]
+    public class Method : Identificator
     {
-        private Structures.List _arguments;
+        public List Arguments;
+
+        public Method()
+        {
+        }
 
         public Method(
             string name,
-            Structures.List arguments,
+            List arguments,
             Types.Value valueType,
-            Types.Identificator identType = Types.Identificator.methods)
+            Types.Identification identType = Types.Identification.methods)
             : base(name, valueType, identType) =>
-            _arguments = arguments;
+            Arguments = arguments;
     }
 }
