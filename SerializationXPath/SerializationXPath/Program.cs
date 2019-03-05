@@ -5,6 +5,7 @@ namespace SerializationXPath
     using System.Collections.Generic;
     using System.IO;
     using System.Runtime.Serialization.Formatters.Binary;
+    using System.Threading;
     using System.Xml;
     using System.Xml.Serialization;
 
@@ -16,7 +17,13 @@ namespace SerializationXPath
         {
             MakeTreeSerializationTask();
 
-            MakeXmlTask();
+            string outPath = ZipWorker.ExtractZipFiles(null);
+            
+            Console.WriteLine("\n\tПарсинг методами xpath:");
+            MakeXmlTask(new XmlStandardWorker(), outPath);
+
+            Console.WriteLine("\n\tПарсинг свои методом:");
+            MakeXmlTask(new XmlСraftWorker(), outPath);
 
             Console.WriteLine("\n\tДля завершения работы нажмите любую клавишу...");
             Console.ReadKey();
@@ -28,6 +35,29 @@ namespace SerializationXPath
             var tree = new BinaryTree(treePath);
             var binaryTree = (BinaryTree)TestTreeBinarySerialize(tree);
             var xmlTree = (BinaryTree)TestTreeXmlSerialize(tree);
+        }
+
+        private static void MakeXmlTask(IXmlWorker xmlWorker, string path)
+        {
+            var customers = new List<Customer>();
+
+            foreach (var file in Directory.GetFiles(path, "*xml"))
+            {
+                foreach (Customer customer in ParseXmlFile(xmlWorker, file))
+                {
+                    Customer existCustomer = customers.Find(x => x.INN == customer.INN);
+                    if (existCustomer == null)
+                    {
+                        existCustomer = new Customer(customer.FullName, customer.INN, customer.KPP);
+                        customers.Add(existCustomer);
+                    }
+
+                    existCustomer.PositionCount += customer.PositionCount;
+                    existCustomer.Positions.AddRange(customer.Positions);
+                }
+            }
+
+            PrintCustomers(customers);
         }
 
         private static object TestTreeBinarySerialize(object element)
@@ -70,32 +100,7 @@ namespace SerializationXPath
             return deserializedElement;
         }
 
-        private static void MakeXmlTask()
-        {
-            var customers = new List<Customer>();
-            string path = null;
-            string outPath = ZipWorker.ExtractZipFiles(path);
-
-            foreach (var file in Directory.GetFiles(outPath, "*xml"))
-            {
-                foreach (Customer customer in ParseXmlFile(file))
-                {
-                    Customer existCustomer = customers.Find(x => x.INN == customer.INN);
-                    if (existCustomer == null)
-                    {
-                        existCustomer = new Customer(customer.FullName, customer.INN, customer.KPP);
-                        customers.Add(existCustomer);
-                    }
-
-                    existCustomer.PositionCount += customer.PositionCount;
-                    existCustomer.Positions.AddRange(customer.Positions);
-                }
-            }
-
-            PrintCustomers(customers);
-        }
-
-        private static List<Customer> ParseXmlFile(string path)
+        private static List<Customer> ParseXmlFile(IXmlWorker xmlWorker, string path)
         {
             var customers = new List<Customer>();
             var xDoc = new XmlDocument();
@@ -109,24 +114,24 @@ namespace SerializationXPath
                     var customer = new Customer
                                        {
                                            FullName =
-                                               XmlWorker.FindXmlNode(tenderPlan, "commonInfo/customerInfo/fullName")
+                                               xmlWorker.FindXmlNode(tenderPlan, "commonInfo/customerInfo/fullName")
                                                    ?.FirstChild?.Value,
-                                           INN = XmlWorker.FindXmlNode(tenderPlan, "commonInfo/customerInfo/INN")
+                                           INN = xmlWorker.FindXmlNode(tenderPlan, "commonInfo/customerInfo/INN")
                                                ?.FirstChild?.Value,
-                                           KPP = XmlWorker.FindXmlNode(tenderPlan, "commonInfo/customerInfo/KPP")
+                                           KPP = xmlWorker.FindXmlNode(tenderPlan, "commonInfo/customerInfo/KPP")
                                                ?.FirstChild?.Value
                                        };
 
-                    XmlNode positions = XmlWorker.FindXmlNode(tenderPlan, "positions");
+                    XmlNode positions = xmlWorker.FindXmlNode(tenderPlan, "positions");
                     if (positions != null)
                     {
                         foreach (XmlElement position in positions)
                         {
-                            string code = XmlWorker.FindXmlNode(position, "purchaseObjectInfo/OKPD2Info/OKPD2/code")
+                            string code = xmlWorker.FindXmlNode(position, "purchaseObjectInfo/OKPD2Info/OKPD2/code")
                                 ?.FirstChild?.Value;
                             double cost;
                             if (double.TryParse(
-                                XmlWorker.FindXmlNode(position, "commonInfo/financeInfo/planPayments/total")?.FirstChild
+                                xmlWorker.FindXmlNode(position, "commonInfo/financeInfo/planPayments/total")?.FirstChild
                                     ?.Value,
                                 out cost))
                             {
@@ -150,6 +155,7 @@ namespace SerializationXPath
 
         private static void PrintCustomers(List<Customer> customers)
         {
+            Console.WriteLine($"Всего организаций: {customers.Count}");
             string specialCode = "63";
             foreach (var customer in customers)
             {

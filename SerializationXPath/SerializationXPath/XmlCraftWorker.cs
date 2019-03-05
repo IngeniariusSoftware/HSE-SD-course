@@ -3,9 +3,9 @@ namespace SerializationXPath
 {
     using System.Xml;
 
-    public static class XmlWorker
+    public class XmlСraftWorker : IXmlWorker
     {
-        public static XmlNode FindXmlNode(XmlNode root, string path)
+        public XmlNode FindXmlNode(XmlNode root, string path)
         {
             XmlNode goalRoot = root.Clone();
             bool isFound = true;
@@ -24,14 +24,7 @@ namespace SerializationXPath
                 }
             }
 
-            if (isFound)
-            {
-                return goalRoot;
-            }
-            else
-            {
-                return null;
-            }
+            return isFound ? goalRoot : null;
         }
     }
 }
