@@ -25,11 +25,14 @@ namespace SerializationXPath
             {
                 using (var zip = ZipFile.Read(zipFile))
                 {
+                    Console.WriteLine($"\n\tНачата распаковка файла в папку {outputPath}\n");
+                    var consoleBar = new ConsoleStatusBar(zip.Count);
+                    zip.ExtractProgress += consoleBar.ShowZipExtractProgress;
                     zip.ExtractAll(outputPath);
                 }
             }
 
-            Console.WriteLine($"\n\tФайлы распакованы в папку {outputPath}");
+            Console.WriteLine($"\n\tФайлы успешно распакованы в папку {outputPath}");
             return outputPath;
         }
     }
