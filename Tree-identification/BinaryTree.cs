@@ -14,9 +14,14 @@ namespace Tree_identification
 
         public BinaryTree()
         {
-            Root = null;
-            LeftBranch = null;
-            RightBranch = null;
+        }
+
+        public BinaryTree(string filePath)
+        {
+            foreach (string sentence in TreeMaker.FileParse(filePath))
+            {
+                Add(TreeMaker.SentenceParse(sentence));
+            }
         }
 
         public BinaryTree(Identificator root)
