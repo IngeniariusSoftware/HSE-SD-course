@@ -31,8 +31,10 @@ namespace SerializationXPath
                 if (_progress < (int)((double)_status / _length * 100))
                 {
                     Console.SetCursorPosition(_progress + 8, _currentLine);
-                    Console.Write('/');
+                    Console.BackgroundColor = ConsoleColor.Gray;
+                    Console.Write(" ");
                     _progress = (int)((double)_status / _length * 100);
+                    Console.BackgroundColor = ConsoleColor.Black;
                 }
 
                 Console.SetCursorPosition(110, _currentLine);
