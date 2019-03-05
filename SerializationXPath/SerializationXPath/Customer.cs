@@ -3,6 +3,7 @@ namespace SerializationXPath
 {
     using System.Collections.Generic;
     using System.Linq;
+    using System.Text;
 
     public class Customer
     {
@@ -43,7 +44,12 @@ namespace SerializationXPath
 
         public override string ToString()
         {
-            return FullName;
+            var information = new StringBuilder(512);
+            information.AppendLine($"\nОрганизация: {FullName}");
+            information.AppendLine($"ИНН: {INN}");
+            information.AppendLine($"КПП: {KPP}");
+            information.AppendLine($"Количество позиций: {PositionCount}");
+            return information.ToString();
         }
     }
 }
