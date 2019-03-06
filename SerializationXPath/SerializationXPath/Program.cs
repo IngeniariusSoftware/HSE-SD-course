@@ -17,11 +17,7 @@ namespace SerializationXPath
             MakeTreeSerializationTask();
 
             string outPath = ZipWorker.ExtractZipFiles(null);
-            
-            Console.WriteLine("\n\tПарсинг методами xpath:");
-            MakeXmlTask(new XmlStandardWorker(), outPath);
 
-            Console.WriteLine("\n\tПарсинг свои методом:");
             MakeXmlTask(new XmlСraftWorker(), outPath);
 
             Console.WriteLine("\n\tДля завершения работы нажмите любую клавишу...");
